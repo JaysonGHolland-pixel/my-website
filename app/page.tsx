@@ -1,6 +1,7 @@
 import FlowGraphic from "@/components/FlowGraphic";
 import Reveal from "@/components/Reveal";
 import ServiceCard from "@/components/ServiceCard";
+import StepCard from "@/components/StepCard";
 
 const CONTACT_EMAIL = "JaysonAiHolland@gmail.com";
 
@@ -62,6 +63,16 @@ const STEPS = [
     title: "Map the process",
     description:
       "Walk through what the workflow actually does today, tool by tool, before touching any automation.",
+    demo: {
+      heading: "What discovery notes look like",
+      lines: [
+        "1. New lead lands in inbox",
+        "2. Copy details into spreadsheet by hand",
+        "3. Send templated reply — takes ~8 min per lead",
+        "4. Update CRM manually, often forgotten",
+      ],
+      note: "This is the kind of before-picture a mapping session produces — the automation gets built around it.",
+    },
   },
   {
     number: "02",
@@ -69,6 +80,16 @@ const STEPS = [
     title: "Build the system",
     description:
       "Wire the agents, workflows, and integrations in a sandbox — nothing touches production until it's proven.",
+    demo: {
+      heading: "What the build stage looks like",
+      lines: [
+        "Webhook Trigger → receives the lead",
+        "Function node → parses & validates payload",
+        "Condition → urgent? routes to AI Agent : direct reply",
+        "Tested against 12 sample payloads before going live",
+      ],
+      note: "Simplified from a real build sequence — the actual sandbox has more error handling than this.",
+    },
   },
   {
     number: "03",
@@ -76,28 +97,21 @@ const STEPS = [
     title: "Ship and hand off",
     description:
       "Deploy to your environment, document what was built, and hand over ownership — not a black box.",
+    demo: {
+      heading: "What you actually get",
+      lines: [
+        "✓ Live workflow in your own n8n/tool account",
+        "✓ One-page README explaining what each step does",
+        "✓ Credentials stay in your accounts, not mine",
+      ],
+      note: "The point is you can hand this to anyone else later — nothing is locked to me.",
+    },
   },
 ];
 
 export default function Home() {
   return (
-    <>
-      <header className="sticky top-0 z-10 border-b-2 border-ink/10 bg-paper/90 backdrop-blur">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-          <span className="flex items-center font-display text-lg font-semibold">
-            <span className="mr-2 inline-block h-3 w-3 rounded-full bg-punch" />
-            Jayson AI Holland
-          </span>
-          <a
-            href="#contact"
-            className="pop-button rounded-full bg-ink px-5 py-2.5 font-display text-sm font-semibold text-paper shadow-[4px_4px_0_var(--color-sun)]"
-          >
-            Start a build 🚀
-          </a>
-        </div>
-      </header>
-
-      <main className="overflow-x-hidden">
+    <main className="overflow-x-hidden">
         <section className="relative px-6 pt-20 pb-24 sm:pt-28 sm:pb-32">
           <span
             aria-hidden="true"
@@ -110,7 +124,8 @@ export default function Home() {
 
           <div className="relative mx-auto max-w-3xl text-center">
             <span className="inline-block rounded-full border-2 border-ink/10 bg-white px-4 py-1.5 font-mono text-xs tracking-wide text-ink/70 uppercase">
-              ✨ Jayson AI Holland — Automation Studio
+              <span className="spark">✨</span> Jayson AI Holland — Automation
+              Studio
             </span>
 
             <h1 className="mt-6 font-display text-4xl leading-[1.15] font-bold sm:text-6xl">
@@ -127,7 +142,7 @@ export default function Home() {
             <div className="mt-10 flex flex-wrap justify-center gap-4">
               <a
                 href="#contact"
-                className="pop-button rounded-full bg-gradient-to-r from-volt to-punch px-7 py-3.5 font-display text-sm font-semibold text-white shadow-lg"
+                className="pop-button glow-cta rounded-full bg-gradient-to-r from-volt to-punch px-7 py-3.5 font-display text-sm font-semibold text-white shadow-lg"
               >
                 Start a build 🚀
               </a>
@@ -180,21 +195,8 @@ export default function Home() {
             <ol className="mt-14 space-y-6">
               {STEPS.map((step, i) => (
                 <Reveal key={step.number} delay={i * 120}>
-                  <li className="tilt-card flex items-start gap-5 rounded-3xl border-2 border-ink/10 bg-white p-6 shadow-sm">
-                    <span className="wiggle-hover flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-sun/30 text-2xl">
-                      {step.emoji}
-                    </span>
-                    <div>
-                      <span className="font-mono text-xs tracking-widest text-ink/40">
-                        {step.number}
-                      </span>
-                      <h3 className="font-display text-lg font-bold">
-                        {step.title}
-                      </h3>
-                      <p className="mt-1 text-sm leading-relaxed text-ink/70">
-                        {step.description}
-                      </p>
-                    </div>
+                  <li>
+                    <StepCard {...step} />
                   </li>
                 </Reveal>
               ))}
@@ -232,14 +234,6 @@ export default function Home() {
             </a>
           </Reveal>
         </section>
-      </main>
-
-      <footer className="border-t-2 border-ink/10 bg-paper py-10">
-        <div className="mx-auto flex max-w-5xl flex-col items-start justify-between gap-4 px-6 font-mono text-xs tracking-widest text-ink/50 uppercase sm:flex-row sm:items-center">
-          <span>Jayson AI Holland</span>
-          <span>&copy; {new Date().getFullYear()}</span>
-        </div>
-      </footer>
-    </>
+    </main>
   );
 }

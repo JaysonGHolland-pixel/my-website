@@ -124,7 +124,7 @@ export default function DiscoveryForm() {
         type="submit"
         className="pop-button glow-cta mt-6 w-full rounded-full bg-gradient-to-r from-volt to-punch px-8 py-4 font-display text-sm font-semibold text-white shadow-lg sm:w-auto"
       >
-        Start a build 🚀
+        Start a build
       </button>
 
       <p className="mt-3 font-mono text-[11px] text-muted">

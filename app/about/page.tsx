@@ -80,7 +80,7 @@ export default function About() {
               href="/contact"
               className="pop-button glow-cta mt-4 inline-block rounded-full bg-gradient-to-r from-volt to-punch px-7 py-3.5 font-display text-sm font-semibold text-white shadow-lg"
             >
-              Start a build 🚀
+              Start a build
             </Link>
           </Reveal>
         </div>

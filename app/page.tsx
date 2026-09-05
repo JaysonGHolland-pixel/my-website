@@ -5,7 +5,6 @@ import ServiceCard from "@/components/ServiceCard";
 import StepCard from "@/components/StepCard";
 import PipelineDemo from "@/components/PipelineDemo";
 import SupportAgentDemo from "@/components/SupportAgentDemo";
-import ThinkingFramework from "@/components/ThinkingFramework";
 
 const SERVICES = [
   {
@@ -58,30 +57,47 @@ const SERVICES = [
   },
 ];
 
-const STEPS = [
+const BUILD_PHASES = [
   {
     number: "01",
     emoji: "🔍",
-    title: "Map the process",
+    title: "Discover",
     description:
-      "Walk through what the workflow actually does today, tool by tool, before touching any automation.",
+      "Find the repetitive, slow, expensive, or error-prone process — before touching any tool.",
     demo: {
-      heading: "What discovery notes look like",
+      heading: "What a discovery conversation surfaces",
       lines: [
-        "1. New lead lands in inbox",
-        "2. Copy details into spreadsheet by hand",
-        "3. Send templated reply — takes ~8 min per lead",
-        "4. Update CRM manually, often forgotten",
+        "New lead lands in inbox",
+        "Details copied into a spreadsheet by hand",
+        "Templated reply sent — ~8 min per lead",
+        "CRM updated manually, often forgotten",
       ],
-      note: "This is the kind of before-picture a mapping session produces — the automation gets built around it.",
+      note: "This is the kind of before-picture a discovery conversation produces — the automation gets built around it.",
     },
   },
   {
     number: "02",
-    emoji: "🛠️",
-    title: "Build the system",
+    emoji: "🧭",
+    title: "Design",
     description:
-      "Wire the agents, workflows, and integrations in a sandbox — nothing touches production until it's proven.",
+      "Map the workflow step by step and find exactly where automation creates real leverage.",
+    demo: {
+      heading: "What a workflow map looks like",
+      lines: [
+        "Trigger: form submitted",
+        "Decision: urgent vs. routine",
+        "Branch A: AI drafts reply + notifies sales",
+        "Branch B: logged for the next business day",
+      ],
+      note: "Every branch and decision point gets mapped before a single line of automation is built.",
+    },
+  },
+  {
+    number: "03",
+    emoji: "🛠️",
+    title: "Build",
+    description:
+      "Connect the APIs, tools, databases, agents, and workflows the process actually needs.",
     demo: {
       heading: "What the build stage looks like",
       lines: [
@@ -94,17 +110,34 @@ const STEPS = [
     },
   },
   {
-    number: "03",
-    emoji: "🚀",
-    title: "Ship and hand off",
+    number: "04",
+    emoji: "🧪",
+    title: "Test",
     description:
-      "Deploy to your environment, document what was built, and hand over ownership — not a black box.",
+      "Run realistic scenarios and the edge cases that break naive automations.",
+    demo: {
+      heading: "What testing actually covers",
+      lines: [
+        "Empty or malformed form fields",
+        "Duplicate submissions within seconds",
+        "Non-English input",
+        "The CRM API timing out mid-request",
+      ],
+      note: "If a workflow only handles the happy path, it isn't finished — this is where that gets caught.",
+    },
+  },
+  {
+    number: "05",
+    emoji: "🚀",
+    title: "Ship",
+    description:
+      "Deploy, document, monitor, and hand off — so the system outlives the build.",
     demo: {
       heading: "What you actually get",
       lines: [
-        "✓ Live workflow in your own n8n/tool account",
-        "✓ One-page README explaining what each step does",
-        "✓ Credentials stay in your accounts, not mine",
+        "Live workflow in your own n8n/tool account",
+        "One-page README explaining what each step does",
+        "Credentials stay in your accounts, not mine",
       ],
       note: "The point is you can hand this to anyone else later — nothing is locked to me.",
     },
@@ -135,9 +168,9 @@ export default function Home() {
           </h1>
 
           <p className="mx-auto mt-8 max-w-lg text-lg leading-relaxed text-muted">
-            I design and build AI agents, workflows, and connected systems
+            I design and build the agents, workflows, and connected systems
             that turn repetitive business processes into automation that
-            actually ships. See it work below — not just described.
+            actually ships.
           </p>
 
           <div className="mt-12 flex flex-wrap justify-center gap-4">
@@ -145,7 +178,7 @@ export default function Home() {
               href="/contact"
               className="pop-button glow-cta rounded-full bg-gradient-to-r from-volt to-punch px-8 py-4 font-display text-sm font-semibold text-white shadow-lg"
             >
-              Start a build 🚀
+              Start a build
             </Link>
             <a
               href="#demos"
@@ -159,15 +192,20 @@ export default function Home() {
         <HeroGlobe />
       </section>
 
-      <section id="mission" className="relative px-6 pt-0 pb-28 sm:pb-36">
+      <section id="approach" className="relative px-6 pt-0 pb-28 sm:pb-36">
         <div className="mx-auto max-w-3xl">
           <Reveal>
             <p className="text-center font-mono text-xs tracking-widest text-punch uppercase">
-              Mission timeline
+              How I approach this
             </p>
             <h2 className="display-tight mt-4 text-center font-display text-4xl font-bold sm:text-5xl">
-              Three stages. Nothing skipped.
+              I don&rsquo;t start with &ldquo;what AI tool should we
+              use.&rdquo;
             </h2>
+            <p className="mx-auto mt-5 max-w-md text-center text-muted">
+              I start with: what happens when this breaks, slows down, or
+              gets missed?
+            </p>
           </Reveal>
 
           <div className="relative mt-16">
@@ -176,10 +214,10 @@ export default function Home() {
               aria-hidden="true"
             />
             <ol className="space-y-6">
-              {STEPS.map((step, i) => (
-                <Reveal key={step.number} delay={i * 120}>
+              {BUILD_PHASES.map((phase, i) => (
+                <Reveal key={phase.number} delay={i * 100}>
                   <li>
-                    <StepCard {...step} />
+                    <StepCard {...phase} />
                   </li>
                 </Reveal>
               ))}
@@ -194,7 +232,7 @@ export default function Home() {
             <p className="text-center font-mono text-xs tracking-widest text-mint uppercase">
               Built systems
             </p>
-            <h2 className="display-tight mt-4 text-center font-display text-4xl font-bold sm:text-5xl">
+            <h2 className="display-tight mt-4 text-center font-display text-4xl font-bold sm:text-6xl">
               Proof, not a pitch.
             </h2>
             <p className="mx-auto mt-5 max-w-xl text-center text-muted">
@@ -212,13 +250,13 @@ export default function Home() {
                 problem="Leads arrive through a website form at all hours — including nights and weekends. A slow response is often the difference between a sale and a lost lead."
                 accent="var(--color-volt)"
                 steps={[
-                  { label: "New lead received", log: "Form submission captured: name, email, message." },
-                  { label: "AI analyzes lead", log: "Reading intent and urgency from the message." },
-                  { label: "Lead qualified", log: "Classified: high-intent, ready to talk." },
-                  { label: "CRM updated", log: "Contact record created with lead details." },
-                  { label: "Personalized response generated", log: "Drafting a reply referencing what they actually asked." },
-                  { label: "Sales notification triggered", log: "Alert sent to the sales channel." },
-                  { label: "Follow-up scheduled", log: "Reminder set for 24 hours if no reply." },
+                  { label: "New lead received", log: "Form submission captured: name, email, message.", phase: "input" },
+                  { label: "AI analyzes lead", log: "Reading intent and urgency from the message.", phase: "logic" },
+                  { label: "Lead qualified", log: "Classified: high-intent, ready to talk.", phase: "logic" },
+                  { label: "CRM updated", log: "Contact record created with lead details.", phase: "automation" },
+                  { label: "Personalized response generated", log: "Drafting a reply referencing what they actually asked.", phase: "automation" },
+                  { label: "Sales notification triggered", log: "Alert sent to the sales channel.", phase: "automation" },
+                  { label: "Follow-up scheduled", log: "Reminder set for 24 hours if no reply.", phase: "output" },
                 ]}
                 architecture={[
                   "Website form",
@@ -243,13 +281,13 @@ export default function Home() {
                 problem="Every incoming email that needs sorting, logging, and a reply eats time that should go to actual work — not retyping the same three responses."
                 accent="var(--color-mint)"
                 steps={[
-                  { label: "Incoming email received", log: "New message pulled from the inbox." },
-                  { label: "AI reads email", log: "Parsing sender, subject, and body." },
-                  { label: "Extracts key information", log: "Pulled: request type, deadline, reference number." },
-                  { label: "Categorizes request", log: "Classified as: invoice query." },
-                  { label: "Updates spreadsheet/database", log: "Row added to the tracking sheet." },
-                  { label: "Creates task", log: "Task assigned: follow up by Friday." },
-                  { label: "Sends response", log: "Acknowledgement reply sent." },
+                  { label: "Incoming email received", log: "New message pulled from the inbox.", phase: "input" },
+                  { label: "AI reads email", log: "Parsing sender, subject, and body.", phase: "logic" },
+                  { label: "Extracts key information", log: "Pulled: request type, deadline, reference number.", phase: "logic" },
+                  { label: "Categorizes request", log: "Classified as: invoice query.", phase: "logic" },
+                  { label: "Updates spreadsheet/database", log: "Row added to the tracking sheet.", phase: "automation" },
+                  { label: "Creates task", log: "Task assigned: follow up by Friday.", phase: "automation" },
+                  { label: "Sends response", log: "Acknowledgement reply sent.", phase: "output" },
                 ]}
                 architecture={[
                   "Inbox (Gmail/Outlook API)",
@@ -266,33 +304,11 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="approach" className="relative px-6 py-28 sm:py-36">
-        <div className="mx-auto max-w-5xl">
-          <Reveal>
-            <p className="text-center font-mono text-xs tracking-widest text-sun uppercase">
-              How I approach this
-            </p>
-            <h2 className="display-tight mx-auto mt-4 max-w-2xl text-center font-display text-4xl font-bold sm:text-5xl">
-              I don&rsquo;t start with &ldquo;what AI tool should we
-              use.&rdquo;
-            </h2>
-            <p className="mx-auto mt-5 max-w-lg text-center text-muted">
-              I start with: what happens when this breaks, slows down, or
-              gets missed?
-            </p>
-          </Reveal>
-
-          <Reveal delay={120} className="mt-14">
-            <ThinkingFramework />
-          </Reveal>
-        </div>
-      </section>
-
       <section id="services" className="relative px-6 py-28 sm:py-36">
         <div className="mx-auto max-w-5xl">
           <Reveal>
             <p className="font-mono text-xs tracking-widest text-sun uppercase">
-              What we build
+              What I build
             </p>
             <h2 className="display-tight mt-4 max-w-2xl font-display text-4xl font-bold sm:text-5xl">
               Three ways automation actually earns its keep.
@@ -351,7 +367,7 @@ export default function Home() {
               Build proof
             </p>
             <h2 className="display-tight mt-4 text-center font-display text-3xl font-bold sm:text-4xl">
-              This site is build proof #1.
+              This website is proof #1.
             </h2>
           </Reveal>
 
@@ -406,18 +422,17 @@ export default function Home() {
 
         <Reveal className="relative mx-auto max-w-xl text-center">
           <h2 className="display-tight font-display text-4xl font-bold sm:text-5xl">
-            Ready for lift-off?
+            Have a process worth automating?
           </h2>
           <p className="mx-auto mt-5 max-w-md text-muted">
-            Tell me what&rsquo;s slow, manual, or held together with
-            copy-paste. I&rsquo;ll tell you straight whether automation
-            actually fixes it.
+            Tell me what&rsquo;s happening today — I&rsquo;ll tell you
+            straight whether automation actually helps.
           </p>
           <Link
             href="/contact"
             className="pop-button glow-cta mt-9 inline-block rounded-full bg-gradient-to-r from-volt to-punch px-8 py-4 font-display text-sm font-semibold text-white shadow-lg"
           >
-            Start a build 🚀
+            Start a build
           </Link>
         </Reveal>
       </section>

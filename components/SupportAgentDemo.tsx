@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import ArchitectureDiagram from "@/components/ArchitectureDiagram";
+import PhaseBar, { type Phase } from "@/components/PhaseBar";
 
 const QUESTIONS = [
   {
@@ -24,12 +25,12 @@ const QUESTIONS = [
   },
 ];
 
-const STAGES = [
-  "Customer message received",
-  "AI understands request",
-  "Order information retrieved",
-  "AI generates response",
-  "Conversation logged",
+const STAGES: { label: string; phase: Phase }[] = [
+  { label: "Customer message received", phase: "input" },
+  { label: "AI understands request", phase: "logic" },
+  { label: "Order information retrieved", phase: "logic" },
+  { label: "AI generates response", phase: "automation" },
+  { label: "Conversation logged", phase: "output" },
 ];
 
 const ARCHITECTURE = [
@@ -69,15 +70,25 @@ export default function SupportAgentDemo() {
   };
 
   const active = selected !== null ? QUESTIONS[selected] : null;
+  const done = stageIndex >= STAGES.length - 1;
+  const currentPhase = active ? (done ? "output" : STAGES[stageIndex]?.phase ?? null) : null;
 
   return (
     <div className="glass-panel rounded-[2rem] p-6 sm:p-8">
-      <div className="flex flex-wrap items-center gap-3">
-        <span className="rounded-full bg-punch/20 px-3 py-1 font-mono text-[10px] font-bold tracking-widest text-punch uppercase">
-          Demo Build 02
-        </span>
-        <span className="font-mono text-[10px] tracking-widest text-muted uppercase">
-          Simulated run — not connected to a live backend
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div className="flex flex-wrap items-center gap-3">
+          <span className="rounded-full bg-punch/20 px-3 py-1 font-mono text-[10px] font-bold tracking-widest text-punch uppercase">
+            Demo Build 02
+          </span>
+          <span className="font-mono text-[10px] tracking-widest text-muted uppercase">
+            Simulated data — no live backend
+          </span>
+        </div>
+        <span
+          className="font-mono text-[10px] font-bold tracking-widest uppercase"
+          style={{ color: !active ? "var(--color-muted)" : "var(--color-punch)" }}
+        >
+          {!active ? "Waiting" : done ? "Complete" : "Processing"}
         </span>
       </div>
 
@@ -90,6 +101,10 @@ export default function SupportAgentDemo() {
         drafts a reply — instead of a human retyping the same answer for the
         tenth time today.
       </p>
+
+      <div className="mt-6 overflow-x-auto pb-1">
+        <PhaseBar active={currentPhase} accent="var(--color-punch)" />
+      </div>
 
       <p className="mt-6 font-mono text-[10px] tracking-widest text-muted uppercase">
         Try a question
@@ -126,7 +141,7 @@ export default function SupportAgentDemo() {
                       ? "active"
                       : "pending";
                 return (
-                  <li key={stage} className="flex items-center gap-3 text-sm">
+                  <li key={stage.label} className="flex items-center gap-3 text-sm">
                     <span
                       className={state === "active" ? "pulse-dot" : ""}
                       style={{
@@ -145,7 +160,7 @@ export default function SupportAgentDemo() {
                         state === "pending" ? "text-muted" : "text-starlight"
                       }
                     >
-                      {stage}
+                      {stage.label}
                     </span>
                     {state === "done" && (
                       <span className="ml-auto font-mono text-[10px] text-mint">

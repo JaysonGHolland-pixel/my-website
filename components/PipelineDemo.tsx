@@ -2,10 +2,12 @@
 
 import { useEffect, useRef, useState } from "react";
 import ArchitectureDiagram from "@/components/ArchitectureDiagram";
+import PhaseBar, { type Phase } from "@/components/PhaseBar";
 
 export type PipelineStep = {
   label: string;
   log: string;
+  phase: Phase;
 };
 
 type Status = "idle" | "running" | "done";
@@ -71,20 +73,31 @@ export default function PipelineDemo({
     setLogs([]);
   };
 
+  const currentPhase =
+    status === "idle" ? null : status === "done" ? "output" : steps[activeIndex]?.phase ?? null;
+
   return (
     <div className="glass-panel rounded-[2rem] p-6 sm:p-8">
-      <div className="flex flex-wrap items-center gap-3">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div className="flex flex-wrap items-center gap-3">
+          <span
+            className="rounded-full px-3 py-1 font-mono text-[10px] font-bold tracking-widest uppercase"
+            style={{
+              backgroundColor: `color-mix(in srgb, ${accent} 20%, transparent)`,
+              color: accent,
+            }}
+          >
+            {tag}
+          </span>
+          <span className="font-mono text-[10px] tracking-widest text-muted uppercase">
+            Simulated data — no live backend
+          </span>
+        </div>
         <span
-          className="rounded-full px-3 py-1 font-mono text-[10px] font-bold tracking-widest uppercase"
-          style={{
-            backgroundColor: `color-mix(in srgb, ${accent} 20%, transparent)`,
-            color: accent,
-          }}
+          className="font-mono text-[10px] font-bold tracking-widest uppercase"
+          style={{ color: status === "idle" ? "var(--color-muted)" : accent }}
         >
-          {tag}
-        </span>
-        <span className="font-mono text-[10px] tracking-widest text-muted uppercase">
-          Simulated run — not connected to a live backend
+          {status === "idle" ? "Waiting" : status === "running" ? "Processing" : "Complete"}
         </span>
       </div>
 
@@ -93,21 +106,26 @@ export default function PipelineDemo({
         {problem}
       </p>
 
-      {/* static workflow chain, always visible */}
-      <div className="mt-6 flex flex-wrap items-center gap-x-2 gap-y-3">
-        {steps.map((step, i) => (
-          <div key={step.label} className="flex items-center gap-2">
-            <span className="glass-panel rounded-full px-3 py-1.5 font-mono text-[11px] text-starlight/80">
-              {step.label}
-            </span>
-            {i < steps.length - 1 && (
-              <span className="text-muted" aria-hidden="true">
-                &rarr;
-              </span>
-            )}
-          </div>
-        ))}
+      <div className="mt-6 overflow-x-auto pb-1">
+        <PhaseBar active={currentPhase} accent={accent} />
       </div>
+
+      {status === "idle" && (
+        <div className="mt-6 flex flex-wrap items-center gap-x-2 gap-y-3">
+          {steps.map((step, i) => (
+            <div key={step.label} className="flex items-center gap-2">
+              <span className="glass-panel rounded-full px-3 py-1.5 font-mono text-[11px] text-starlight/80">
+                {step.label}
+              </span>
+              {i < steps.length - 1 && (
+                <span className="text-muted" aria-hidden="true">
+                  &rarr;
+                </span>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
 
       <div className="mt-6 flex flex-wrap gap-3">
         {status === "idle" && (

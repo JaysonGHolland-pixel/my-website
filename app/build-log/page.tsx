@@ -112,7 +112,7 @@ export default function BuildLog() {
             href="/contact"
             className="pop-button glow-cta inline-block rounded-full bg-gradient-to-r from-volt to-punch px-8 py-4 font-display text-sm font-semibold text-white shadow-lg"
           >
-            Start your own build 🚀
+            Start your own build
           </Link>
         </Reveal>
       </div>

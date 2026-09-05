@@ -41,7 +41,7 @@ export default function SiteHeader() {
             href="/contact"
             className="pop-button rounded-full bg-starlight px-5 py-2.5 font-display text-sm font-semibold text-void shadow-[4px_4px_0_var(--color-sun)]"
           >
-            Start a build 🚀
+            Start a build
           </Link>
         </nav>
       </div>

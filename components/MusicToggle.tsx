@@ -21,7 +21,7 @@ export default function MusicToggle() {
 
   return (
     <>
-      <audio ref={audioRef} src="/audio/ambient-lofi.mp3" loop preload="none" />
+      <audio ref={audioRef} src="/audio/space-ambient.mp3" loop preload="none" />
       <button
         type="button"
         onClick={toggle}

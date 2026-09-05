@@ -16,7 +16,7 @@ export default function SiteFooter() {
         <span>&copy; {new Date().getFullYear()}</span>
       </div>
       <p className="mx-auto mt-4 max-w-5xl px-6 font-mono text-[10px] tracking-widest text-muted/40 normal-case">
-        Music: &ldquo;Melancholy Lull&rdquo; by Vital, courtesy of{" "}
+        Music: &ldquo;Prism&rdquo; by Theatre Of Delays, courtesy of{" "}
         <a
           href="https://www.bensound.com"
           className="underline hover:text-muted"

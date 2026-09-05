@@ -1,10 +1,21 @@
-# My-website
+# my-website
 
-New project, kept separate from Foundation since it's its own thing.
+Jayson AI Holland's landing page. Next.js (App Router) + Tailwind v4, built with Claude Code.
 
-## Status
-- [x] Folder created, git initialized
-- [ ] Community's web-design CLAUDE.md (pending — paste it in when you have it)
-- [ ] Real brand assets (logo, guidelines) — or confirm using a placeholder brand to practice with
-- [ ] Vercel account connected
-- [ ] Actual site framework/scaffold — holding off until the above are settled, per the tutorial's own prerequisite order
+## Design
+
+"Blueprint" concept — engineering/schematic aesthetic, since this is an automation agency that builds real systems (n8n workflows, AI agents), not generic AI-agency gloss. Palette, type, and layout tokens live in `app/globals.css`; the signature hero element is `components/NodeCanvas.tsx`.
+
+No real logo yet — header uses a text wordmark. Swap in a logo file + update `brand_assets/` whenever one exists.
+
+## Development
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+## Deploy
+
+Deployed via Vercel, connected to this GitHub repo.

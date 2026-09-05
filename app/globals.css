@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+:root {
+  --blueprint: #102a43;
+  --blueprint-deep: #0b1e33;
+  --vellum: #eef2f5;
+  --trace: #cbd9e3;
+  --ink: #0b1e33;
+  --redline: #e4572e;
+  --signal: #3fa796;
+}
+
+@theme inline {
+  --color-blueprint: var(--blueprint);
+  --color-blueprint-deep: var(--blueprint-deep);
+  --color-vellum: var(--vellum);
+  --color-trace: var(--trace);
+  --color-ink: var(--ink);
+  --color-redline: var(--redline);
+  --color-signal: var(--signal);
+
+  --font-display: var(--font-space-grotesk);
+  --font-sans: var(--font-plex-sans);
+  --font-mono: var(--font-plex-mono);
+}
+
+body {
+  background: var(--vellum);
+  color: var(--ink);
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background: var(--redline);
+  color: var(--vellum);
+}
+
+:focus-visible {
+  outline: 2px solid var(--redline);
+  outline-offset: 3px;
+}
+
+.blueprint-grid {
+  background-image:
+    linear-gradient(var(--trace) 1px, transparent 1px),
+    linear-gradient(90deg, var(--trace) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.register-mark {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+}
+.register-mark::before,
+.register-mark::after {
+  content: "";
+  position: absolute;
+  background: currentColor;
+}
+.register-mark::before {
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  transform: translateY(-50%);
+}
+.register-mark::after {
+  left: 50%;
+  top: 0;
+  height: 100%;
+  width: 1px;
+  transform: translateX(-50%);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .flow-line {
+    stroke-dasharray: 6 6;
+    animation: flow 1.4s linear infinite;
+  }
+}
+
+@keyframes flow {
+  to {
+    stroke-dashoffset: -24;
+  }
+}

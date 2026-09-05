@@ -374,6 +374,8 @@ export default function Home() {
               <div className="mt-4 flex flex-wrap gap-3 font-mono text-xs">
                 <a
                   href="https://github.com/JaysonGHolland-pixel/my-website"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="underline decoration-white/30 hover:text-starlight"
                 >
                   Repository ↗

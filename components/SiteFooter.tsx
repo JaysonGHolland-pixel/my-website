@@ -19,6 +19,8 @@ export default function SiteFooter() {
         Music: &ldquo;Prism&rdquo; by Theatre Of Delays, courtesy of{" "}
         <a
           href="https://www.bensound.com"
+          target="_blank"
+          rel="noopener noreferrer"
           className="underline hover:text-muted"
         >
           Bensound.com

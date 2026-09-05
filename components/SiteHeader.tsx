@@ -14,6 +14,12 @@ export default function SiteHeader() {
 
         <nav className="flex items-center gap-5">
           <Link
+            href="/#demos"
+            className="hidden font-display text-sm font-semibold text-muted transition-colors hover:text-starlight sm:inline"
+          >
+            Work
+          </Link>
+          <Link
             href="/about"
             className="hidden font-display text-sm font-semibold text-muted transition-colors hover:text-starlight sm:inline"
           >

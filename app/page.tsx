@@ -3,6 +3,9 @@ import HeroGlobe from "@/components/HeroGlobe";
 import Reveal from "@/components/Reveal";
 import ServiceCard from "@/components/ServiceCard";
 import StepCard from "@/components/StepCard";
+import PipelineDemo from "@/components/PipelineDemo";
+import SupportAgentDemo from "@/components/SupportAgentDemo";
+import ThinkingFramework from "@/components/ThinkingFramework";
 
 const SERVICES = [
   {
@@ -108,6 +111,14 @@ const STEPS = [
   },
 ];
 
+const TECH_GROUPS = [
+  { label: "AI & Agents", items: ["Claude"] },
+  { label: "Automation", items: ["n8n"] },
+  { label: "Product", items: ["Next.js", "TypeScript", "Tailwind"] },
+  { label: "Infrastructure", items: ["Vercel", "GitHub"] },
+  { label: "Testing", items: ["Playwright"] },
+];
+
 export default function Home() {
   return (
     <main className="relative z-10 overflow-x-hidden">
@@ -119,14 +130,14 @@ export default function Home() {
           </span>
 
           <h1 className="display-tight mt-8 font-display text-5xl leading-[1.05] font-bold sm:text-7xl lg:text-[5.5rem]">
-            Automation that&rsquo;s actually{" "}
-            <span className="gradient-text">fun</span> to watch run.
+            AI systems that actually{" "}
+            <span className="gradient-text">run</span> the work.
           </h1>
 
           <p className="mx-auto mt-8 max-w-lg text-lg leading-relaxed text-muted">
-            AI agents and workflows — designed, wired, and shipped by someone
-            who builds them for a living. No decks, no snooze-fest demos.
-            Just systems that run.
+            I design and build AI agents, workflows, and connected systems
+            that turn repetitive business processes into automation that
+            actually ships. See it work below — not just described.
           </p>
 
           <div className="mt-12 flex flex-wrap justify-center gap-4">
@@ -137,10 +148,10 @@ export default function Home() {
               Start a build 🚀
             </Link>
             <a
-              href="#mission"
+              href="#demos"
               className="glass-panel pop-button rounded-full px-8 py-4 font-display text-sm font-semibold text-starlight"
             >
-              See how a build runs
+              Watch a system run
             </a>
           </div>
         </div>
@@ -177,6 +188,106 @@ export default function Home() {
         </div>
       </section>
 
+      <section id="demos" className="relative px-6 py-28 sm:py-36">
+        <div className="mx-auto max-w-4xl">
+          <Reveal>
+            <p className="text-center font-mono text-xs tracking-widest text-mint uppercase">
+              Built systems
+            </p>
+            <h2 className="display-tight mt-4 text-center font-display text-4xl font-bold sm:text-5xl">
+              Proof, not a pitch.
+            </h2>
+            <p className="mx-auto mt-5 max-w-xl text-center text-muted">
+              Three demo builds you can actually run. Each one is a
+              prototype built to show how the underlying system works — not
+              a claim about a real client project.
+            </p>
+          </Reveal>
+
+          <div className="mt-14 space-y-8">
+            <Reveal>
+              <PipelineDemo
+                tag="Demo Build 01"
+                title="AI lead recovery system"
+                problem="Leads arrive through a website form at all hours — including nights and weekends. A slow response is often the difference between a sale and a lost lead."
+                accent="var(--color-volt)"
+                steps={[
+                  { label: "New lead received", log: "Form submission captured: name, email, message." },
+                  { label: "AI analyzes lead", log: "Reading intent and urgency from the message." },
+                  { label: "Lead qualified", log: "Classified: high-intent, ready to talk." },
+                  { label: "CRM updated", log: "Contact record created with lead details." },
+                  { label: "Personalized response generated", log: "Drafting a reply referencing what they actually asked." },
+                  { label: "Sales notification triggered", log: "Alert sent to the sales channel." },
+                  { label: "Follow-up scheduled", log: "Reminder set for 24 hours if no reply." },
+                ]}
+                architecture={[
+                  "Website form",
+                  "Webhook / API",
+                  "AI Agent (qualification)",
+                  "CRM / database write",
+                  "Response generator",
+                  "Notification (Slack/email)",
+                  "Logging & follow-up scheduler",
+                ]}
+              />
+            </Reveal>
+
+            <Reveal delay={100}>
+              <SupportAgentDemo />
+            </Reveal>
+
+            <Reveal delay={200}>
+              <PipelineDemo
+                tag="Demo Build 03"
+                title="AI business admin automation"
+                problem="Every incoming email that needs sorting, logging, and a reply eats time that should go to actual work — not retyping the same three responses."
+                accent="var(--color-mint)"
+                steps={[
+                  { label: "Incoming email received", log: "New message pulled from the inbox." },
+                  { label: "AI reads email", log: "Parsing sender, subject, and body." },
+                  { label: "Extracts key information", log: "Pulled: request type, deadline, reference number." },
+                  { label: "Categorizes request", log: "Classified as: invoice query." },
+                  { label: "Updates spreadsheet/database", log: "Row added to the tracking sheet." },
+                  { label: "Creates task", log: "Task assigned: follow up by Friday." },
+                  { label: "Sends response", log: "Acknowledgement reply sent." },
+                ]}
+                architecture={[
+                  "Inbox (Gmail/Outlook API)",
+                  "Trigger on new email",
+                  "AI Agent (extraction + classification)",
+                  "Spreadsheet/database write",
+                  "Task creation (project tool)",
+                  "Auto-reply",
+                  "Logging",
+                ]}
+              />
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      <section id="approach" className="relative px-6 py-28 sm:py-36">
+        <div className="mx-auto max-w-5xl">
+          <Reveal>
+            <p className="text-center font-mono text-xs tracking-widest text-sun uppercase">
+              How I approach this
+            </p>
+            <h2 className="display-tight mx-auto mt-4 max-w-2xl text-center font-display text-4xl font-bold sm:text-5xl">
+              I don&rsquo;t start with &ldquo;what AI tool should we
+              use.&rdquo;
+            </h2>
+            <p className="mx-auto mt-5 max-w-lg text-center text-muted">
+              I start with: what happens when this breaks, slows down, or
+              gets missed?
+            </p>
+          </Reveal>
+
+          <Reveal delay={120} className="mt-14">
+            <ThinkingFramework />
+          </Reveal>
+        </div>
+      </section>
+
       <section id="services" className="relative px-6 py-28 sm:py-36">
         <div className="mx-auto max-w-5xl">
           <Reveal>
@@ -195,6 +306,91 @@ export default function Home() {
               </Reveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="relative px-6 pb-28 sm:pb-36">
+        <div className="mx-auto max-w-3xl text-center">
+          <Reveal>
+            <p className="font-mono text-xs tracking-widest text-muted uppercase">
+              Stack
+            </p>
+            <h2 className="display-tight mt-3 font-display text-2xl font-bold">
+              Real tools, not buzzwords.
+            </h2>
+          </Reveal>
+
+          <Reveal delay={100}>
+            <div className="mt-8 flex flex-wrap justify-center gap-x-8 gap-y-5">
+              {TECH_GROUPS.map((group) => (
+                <div key={group.label}>
+                  <p className="font-mono text-[10px] tracking-widest text-muted/60 uppercase">
+                    {group.label}
+                  </p>
+                  <div className="mt-2 flex flex-wrap justify-center gap-2">
+                    {group.items.map((item) => (
+                      <span
+                        key={item}
+                        className="glass-panel rounded-full px-3 py-1 font-mono text-xs text-starlight/80"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="relative px-6 pb-28 sm:pb-36">
+        <div className="mx-auto max-w-4xl">
+          <Reveal>
+            <p className="text-center font-mono text-xs tracking-widest text-punch uppercase">
+              Build proof
+            </p>
+            <h2 className="display-tight mt-4 text-center font-display text-3xl font-bold sm:text-4xl">
+              This site is build proof #1.
+            </h2>
+          </Reveal>
+
+          <Reveal delay={100} className="mt-10 grid gap-4 sm:grid-cols-2">
+            <div className="glass-panel rounded-2xl p-6">
+              <h3 className="font-display text-lg font-bold">
+                Jayson AI Holland — this website
+              </h3>
+              <p className="mt-2 text-sm text-muted">
+                Built with Claude Code, in the open — the Build Log documents
+                every real iteration.
+              </p>
+              <div className="mt-4 flex flex-wrap gap-3 font-mono text-xs">
+                <a
+                  href="https://github.com/JaysonGHolland-pixel/my-website"
+                  className="underline decoration-white/30 hover:text-starlight"
+                >
+                  Repository ↗
+                </a>
+                <Link
+                  href="/build-log"
+                  className="underline decoration-white/30 hover:text-starlight"
+                >
+                  Architecture &amp; process ↗
+                </Link>
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-dashed border-white/15 p-6">
+              <h3 className="font-display text-lg font-bold text-muted">
+                More builds, coming
+              </h3>
+              <p className="mt-2 text-sm text-muted">
+                Additional repositories, live demos, and architecture
+                writeups get linked here as each one ships — nothing
+                invented ahead of time.
+              </p>
+            </div>
+          </Reveal>
         </div>
       </section>
 

@@ -1,43 +1,78 @@
-import NodeCanvas from "@/components/NodeCanvas";
+import FlowGraphic from "@/components/FlowGraphic";
+import Reveal from "@/components/Reveal";
+import ServiceCard from "@/components/ServiceCard";
 
-const CONTACT_EMAIL = "jaysongholland@hotmail.com";
+const CONTACT_EMAIL = "JaysonAiHolland@gmail.com";
 
 const SERVICES = [
   {
-    branch: "BRANCH A",
+    emoji: "🤖",
+    color: "var(--color-volt)",
     title: "AI Agents",
     description:
       "Conversational and task agents wired to your actual tools — not a chatbot that stops at answering questions.",
+    example: {
+      heading: "Support inquiry agent",
+      steps: [
+        "Customer emails asking about an order.",
+        "Agent looks up the real order status and drafts a reply.",
+        "Anything it's unsure about gets flagged for a human to check before it sends.",
+      ],
+      note: "Illustrative example of how this kind of agent is structured — not a specific client result.",
+    },
   },
   {
-    branch: "BRANCH B",
+    emoji: "⚙️",
+    color: "var(--color-punch)",
     title: "Workflow Automation",
     description:
       "n8n pipelines that move data and trigger actions across the tools you already run, with errors that surface instead of failing silently.",
+    example: {
+      heading: "Lead response automation",
+      steps: [
+        "Webhook receives a new form submission.",
+        "Edit Fields node formats a personalized reply.",
+        "Respond to Webhook sends it back — confirmed working end-to-end.",
+      ],
+      note: "A simplified version of a real pipeline built and tested in this studio.",
+    },
   },
   {
-    branch: "BRANCH C",
+    emoji: "🔌",
+    color: "var(--color-mint)",
     title: "Systems Integration",
     description:
       "APIs, webhooks, and data plumbing connected so your existing software actually talks to each other.",
+    example: {
+      heading: "CRM + Slack sync",
+      steps: [
+        "New form submission creates a CRM contact.",
+        "A summary posts to the sales Slack channel.",
+        "If either call fails, a fallback email goes out instead of failing silently.",
+      ],
+      note: "Illustrative example of how this kind of integration is structured — not a specific client result.",
+    },
   },
 ];
 
 const STEPS = [
   {
     number: "01",
+    emoji: "🔍",
     title: "Map the process",
     description:
       "Walk through what the workflow actually does today, tool by tool, before touching any automation.",
   },
   {
     number: "02",
+    emoji: "🛠️",
     title: "Build the system",
     description:
       "Wire the agents, workflows, and integrations in a sandbox — nothing touches production until it's proven.",
   },
   {
     number: "03",
+    emoji: "🚀",
     title: "Ship and hand off",
     description:
       "Deploy to your environment, document what was built, and hand over ownership — not a black box.",
@@ -47,142 +82,160 @@ const STEPS = [
 export default function Home() {
   return (
     <>
-      <header className="sticky top-0 z-10 border-b border-trace/30 bg-vellum/90 backdrop-blur">
+      <header className="sticky top-0 z-10 border-b-2 border-ink/10 bg-paper/90 backdrop-blur">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-          <span className="flex items-center font-mono text-sm tracking-widest uppercase">
-            <span className="mr-2 inline-block h-2 w-2 bg-redline" />
+          <span className="flex items-center font-display text-lg font-semibold">
+            <span className="mr-2 inline-block h-3 w-3 rounded-full bg-punch" />
             Jayson AI Holland
           </span>
           <a
             href="#contact"
-            className="border border-ink px-4 py-2 font-mono text-xs tracking-widest uppercase transition-colors hover:bg-ink hover:text-vellum"
+            className="pop-button rounded-full bg-ink px-5 py-2.5 font-display text-sm font-semibold text-paper shadow-[4px_4px_0_var(--color-sun)]"
           >
-            Start a build
+            Start a build 🚀
           </a>
         </div>
       </header>
 
-      <main>
-        <section className="blueprint-grid relative overflow-hidden bg-blueprint text-vellum">
-          <div className="relative mx-auto max-w-5xl px-6 py-24 sm:py-32">
-            <div className="mb-8 flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-xs tracking-widest text-trace uppercase">
-              <span>Jayson AI Holland</span>
-              <span aria-hidden="true">·</span>
-              <span>Rev 2026.09</span>
-              <span aria-hidden="true">·</span>
-              <span className="text-signal">Status: Live</span>
-            </div>
+      <main className="overflow-x-hidden">
+        <section className="relative px-6 pt-20 pb-24 sm:pt-28 sm:pb-32">
+          <span
+            aria-hidden="true"
+            className="blob absolute top-10 right-[8%] h-56 w-56 rounded-full bg-volt/20 blur-3xl"
+          />
+          <span
+            aria-hidden="true"
+            className="blob blob-reverse blob-slow absolute top-40 left-[4%] h-64 w-64 rounded-full bg-sun/30 blur-3xl"
+          />
 
-            <h1 className="max-w-3xl font-display text-4xl leading-[1.1] font-bold sm:text-6xl">
-              Automation you can point to.
+          <div className="relative mx-auto max-w-3xl text-center">
+            <span className="inline-block rounded-full border-2 border-ink/10 bg-white px-4 py-1.5 font-mono text-xs tracking-wide text-ink/70 uppercase">
+              ✨ Jayson AI Holland — Automation Studio
+            </span>
+
+            <h1 className="mt-6 font-display text-4xl leading-[1.15] font-bold sm:text-6xl">
+              Automation that&rsquo;s actually{" "}
+              <span className="gradient-text">fun</span> to watch run.
             </h1>
 
-            <p className="mt-6 max-w-xl text-lg text-trace">
+            <p className="mx-auto mt-6 max-w-xl text-lg text-ink/70">
               AI agents and workflows — designed, wired, and shipped by
-              someone who builds them for a living. No decks. No hype. Just
-              systems that run.
+              someone who builds them for a living. No decks, no snooze-fest
+              demos. Just systems that run (and look good doing it).
             </p>
 
-            <div className="mt-10 flex flex-wrap gap-4">
+            <div className="mt-10 flex flex-wrap justify-center gap-4">
               <a
                 href="#contact"
-                className="bg-redline px-6 py-3 font-mono text-xs tracking-widest text-vellum uppercase transition-opacity hover:opacity-90"
+                className="pop-button rounded-full bg-gradient-to-r from-volt to-punch px-7 py-3.5 font-display text-sm font-semibold text-white shadow-lg"
               >
-                Start a build
+                Start a build 🚀
               </a>
               <a
                 href="#services"
-                className="border border-trace/60 px-6 py-3 font-mono text-xs tracking-widest uppercase transition-colors hover:border-vellum"
+                className="pop-button rounded-full border-2 border-ink/15 bg-white px-7 py-3.5 font-display text-sm font-semibold"
               >
                 See what we build
               </a>
             </div>
+          </div>
 
-            <div className="mt-16">
-              <NodeCanvas />
+          <div className="relative mt-16">
+            <FlowGraphic />
+          </div>
+        </section>
+
+        <section id="services" className="bg-ink px-6 py-24 text-paper">
+          <div className="mx-auto max-w-5xl">
+            <Reveal>
+              <p className="font-mono text-xs tracking-widest text-sun uppercase">
+                What we build
+              </p>
+              <h2 className="mt-3 max-w-2xl font-display text-3xl font-bold sm:text-4xl">
+                Three ways automation actually earns its keep.
+              </h2>
+            </Reveal>
+
+            <div className="mt-14 grid gap-6 sm:grid-cols-3">
+              {SERVICES.map((service, i) => (
+                <Reveal key={service.title} delay={i * 120}>
+                  <ServiceCard {...service} />
+                </Reveal>
+              ))}
             </div>
           </div>
         </section>
 
-        <section id="services" className="bg-vellum py-24 text-ink">
-          <div className="mx-auto max-w-5xl px-6">
-            <p className="font-mono text-xs tracking-widest text-redline uppercase">
-              What we build
-            </p>
-            <h2 className="mt-3 max-w-2xl font-display text-3xl font-bold sm:text-4xl">
-              Three ways automation actually earns its keep.
-            </h2>
+        <section id="how" className="px-6 py-24">
+          <div className="mx-auto max-w-3xl">
+            <Reveal>
+              <p className="text-center font-mono text-xs tracking-widest text-punch uppercase">
+                How a build runs
+              </p>
+              <h2 className="mt-3 text-center font-display text-3xl font-bold sm:text-4xl">
+                Three stages. Nothing skipped.
+              </h2>
+            </Reveal>
 
-            <div className="mt-16 border-t border-trace">
-              <div className="grid gap-10 sm:grid-cols-3 sm:gap-8">
-                {SERVICES.map((service) => (
-                  <div key={service.title} className="relative pt-8">
-                    <span className="absolute top-0 left-0 h-8 w-px bg-trace" />
-                    <p className="font-mono text-[11px] tracking-widest text-trace uppercase">
-                      {service.branch}
-                    </p>
-                    <h3 className="mt-2 font-display text-xl font-bold">
-                      {service.title}
-                    </h3>
-                    <p className="mt-3 text-sm leading-relaxed text-ink/80">
-                      {service.description}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="how" className="bg-blueprint-deep py-24 text-vellum">
-          <div className="mx-auto max-w-5xl px-6">
-            <p className="font-mono text-xs tracking-widest text-signal uppercase">
-              How a build runs
-            </p>
-            <h2 className="mt-3 max-w-2xl font-display text-3xl font-bold sm:text-4xl">
-              Three stages. Nothing skipped.
-            </h2>
-
-            <ol className="mt-16 max-w-2xl border-l border-trace/40">
-              {STEPS.map((step) => (
-                <li key={step.number} className="relative pb-12 pl-10 last:pb-0">
-                  <span className="absolute top-0 -left-[9px] h-4 w-4 border border-trace bg-blueprint-deep" />
-                  <span className="font-mono text-xs tracking-widest text-trace">
-                    {step.number}
-                  </span>
-                  <h3 className="mt-1 font-display text-lg font-bold">
-                    {step.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-trace">
-                    {step.description}
-                  </p>
-                </li>
+            <ol className="mt-14 space-y-6">
+              {STEPS.map((step, i) => (
+                <Reveal key={step.number} delay={i * 120}>
+                  <li className="tilt-card flex items-start gap-5 rounded-3xl border-2 border-ink/10 bg-white p-6 shadow-sm">
+                    <span className="wiggle-hover flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-sun/30 text-2xl">
+                      {step.emoji}
+                    </span>
+                    <div>
+                      <span className="font-mono text-xs tracking-widest text-ink/40">
+                        {step.number}
+                      </span>
+                      <h3 className="font-display text-lg font-bold">
+                        {step.title}
+                      </h3>
+                      <p className="mt-1 text-sm leading-relaxed text-ink/70">
+                        {step.description}
+                      </p>
+                    </div>
+                  </li>
+                </Reveal>
               ))}
             </ol>
           </div>
         </section>
 
-        <section id="contact" className="bg-redline py-20 text-vellum">
-          <div className="mx-auto max-w-5xl px-6 text-center">
+        <section
+          id="contact"
+          className="relative overflow-hidden bg-gradient-to-br from-volt to-punch px-6 py-24 text-white"
+        >
+          <span
+            aria-hidden="true"
+            className="blob absolute -top-10 -left-10 h-56 w-56 rounded-full bg-white/10 blur-3xl"
+          />
+          <span
+            aria-hidden="true"
+            className="blob blob-reverse absolute -right-10 -bottom-10 h-64 w-64 rounded-full bg-sun/20 blur-3xl"
+          />
+
+          <Reveal className="relative mx-auto max-w-xl text-center">
             <h2 className="font-display text-3xl font-bold sm:text-4xl">
               Start a build.
             </h2>
-            <p className="mx-auto mt-4 max-w-md text-vellum/90">
-              Tell me what&rsquo;s slow, manual, or held together with copy-paste.
-              I&rsquo;ll tell you straight whether automation actually fixes it.
+            <p className="mx-auto mt-4 max-w-md text-white/90">
+              Tell me what&rsquo;s slow, manual, or held together with
+              copy-paste. I&rsquo;ll tell you straight whether automation
+              actually fixes it.
             </p>
             <a
               href={`mailto:${CONTACT_EMAIL}`}
-              className="mt-8 inline-block bg-vellum px-6 py-3 font-mono text-xs tracking-widest text-redline uppercase transition-opacity hover:opacity-90"
+              className="pop-button mt-8 inline-block rounded-full bg-white px-7 py-3.5 font-display text-sm font-semibold text-volt shadow-lg"
             >
               Email {CONTACT_EMAIL}
             </a>
-          </div>
+          </Reveal>
         </section>
       </main>
 
-      <footer className="border-t border-trace/30 bg-blueprint py-10 text-trace">
-        <div className="mx-auto flex max-w-5xl flex-col items-start justify-between gap-4 px-6 font-mono text-xs tracking-widest uppercase sm:flex-row sm:items-center">
+      <footer className="border-t-2 border-ink/10 bg-paper py-10">
+        <div className="mx-auto flex max-w-5xl flex-col items-start justify-between gap-4 px-6 font-mono text-xs tracking-widest text-ink/50 uppercase sm:flex-row sm:items-center">
           <span>Jayson AI Holland</span>
           <span>&copy; {new Date().getFullYear()}</span>
         </div>

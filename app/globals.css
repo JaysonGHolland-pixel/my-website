@@ -1,88 +1,168 @@
 @import "tailwindcss";
 
 :root {
-  --blueprint: #102a43;
-  --blueprint-deep: #0b1e33;
-  --vellum: #eef2f5;
-  --trace: #cbd9e3;
-  --ink: #0b1e33;
-  --redline: #e4572e;
-  --signal: #3fa796;
+  --paper: #fbfaff;
+  --ink: #1a1533;
+  --volt: #7c3aed;
+  --punch: #ff5d8f;
+  --sun: #ffc93c;
+  --mint: #2ee6a6;
 }
 
 @theme inline {
-  --color-blueprint: var(--blueprint);
-  --color-blueprint-deep: var(--blueprint-deep);
-  --color-vellum: var(--vellum);
-  --color-trace: var(--trace);
+  --color-paper: var(--paper);
   --color-ink: var(--ink);
-  --color-redline: var(--redline);
-  --color-signal: var(--signal);
+  --color-volt: var(--volt);
+  --color-punch: var(--punch);
+  --color-sun: var(--sun);
+  --color-mint: var(--mint);
 
-  --font-display: var(--font-space-grotesk);
-  --font-sans: var(--font-plex-sans);
-  --font-mono: var(--font-plex-mono);
+  --font-display: var(--font-fredoka);
+  --font-sans: var(--font-jakarta);
+  --font-mono: var(--font-space-mono);
 }
 
 body {
-  background: var(--vellum);
+  background: var(--paper);
   color: var(--ink);
   font-family: var(--font-sans);
 }
 
 ::selection {
-  background: var(--redline);
-  color: var(--vellum);
+  background: var(--sun);
+  color: var(--ink);
 }
 
 :focus-visible {
-  outline: 2px solid var(--redline);
+  outline: 3px solid var(--volt);
   outline-offset: 3px;
+  border-radius: 2px;
 }
 
-.blueprint-grid {
-  background-image:
-    linear-gradient(var(--trace) 1px, transparent 1px),
-    linear-gradient(90deg, var(--trace) 1px, transparent 1px);
-  background-size: 32px 32px;
+.gradient-text {
+  background: linear-gradient(120deg, var(--volt), var(--punch));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
-.register-mark {
-  position: absolute;
-  width: 14px;
-  height: 14px;
-  pointer-events: none;
+.pop-button {
+  transition:
+    transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.2s ease;
 }
-.register-mark::before,
-.register-mark::after {
-  content: "";
-  position: absolute;
-  background: currentColor;
+.pop-button:hover {
+  transform: translateY(-3px) rotate(-1deg) scale(1.03);
 }
-.register-mark::before {
-  top: 50%;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  transform: translateY(-50%);
+.pop-button:active {
+  transform: translateY(0) scale(0.98);
 }
-.register-mark::after {
-  left: 50%;
-  top: 0;
-  height: 100%;
-  width: 1px;
-  transform: translateX(-50%);
+
+.tilt-card {
+  transition:
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.25s ease;
+}
+.tilt-card:hover {
+  transform: translateY(-6px) rotate(-0.75deg);
+  box-shadow: 0 20px 40px -20px rgb(26 21 51 / 0.35);
 }
 
 @media (prefers-reduced-motion: no-preference) {
+  .blob {
+    animation: drift 14s ease-in-out infinite;
+  }
+  .blob-slow {
+    animation-duration: 20s;
+  }
+  .blob-reverse {
+    animation-direction: reverse;
+  }
+
+  .float {
+    animation: float-y 4.5s ease-in-out infinite;
+  }
+
   .flow-line {
-    stroke-dasharray: 6 6;
-    animation: flow 1.4s linear infinite;
+    stroke-dasharray: 7 7;
+    animation: flow 1s linear infinite;
+  }
+
+  .pulse-dot {
+    animation: pulse 1.8s ease-in-out infinite;
+  }
+
+  .wiggle-hover:hover {
+    animation: wiggle 0.4s ease-in-out;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px) scale(0.98);
+    transition:
+      opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(24px, -18px) rotate(8deg);
+  }
+}
+
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
   }
 }
 
 @keyframes flow {
   to {
-    stroke-dashoffset: -24;
+    stroke-dashoffset: -28;
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.6);
+    opacity: 0.5;
+  }
+}
+
+@keyframes wiggle {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-6deg);
+  }
+  75% {
+    transform: rotate(6deg);
   }
 }

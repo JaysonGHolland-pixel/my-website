@@ -1,38 +1,38 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
+import { Fredoka, Plus_Jakarta_Sans, Space_Mono } from "next/font/google";
 import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
+const fredoka = Fredoka({
+  variable: "--font-fredoka",
   subsets: ["latin"],
   weight: ["500", "600", "700"],
 });
 
-const plexSans = IBM_Plex_Sans({
-  variable: "--font-plex-sans",
+const jakarta = Plus_Jakarta_Sans({
+  variable: "--font-jakarta",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
 });
 
-const plexMono = IBM_Plex_Mono({
-  variable: "--font-plex-mono",
+const spaceMono = Space_Mono({
+  variable: "--font-space-mono",
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["400", "700"],
 });
 
 export const metadata: Metadata = {
-  title: "Jayson AI Holland — Automation, built and shipped",
+  title: "Jayson AI Holland — Automation that's actually fun to run",
   description:
-    "AI agents, n8n workflows, and systems integration — designed and shipped by a practitioner, not sold as a deck.",
+    "AI agents, n8n workflows, and systems integration — built and shipped by a practitioner, not sold as a deck.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${spaceGrotesk.variable} ${plexSans.variable} ${plexMono.variable} h-full antialiased`}
+      className={`${fredoka.variable} ${jakarta.variable} ${spaceMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-vellum text-ink">
+      <body className="min-h-full flex flex-col overflow-x-hidden bg-paper text-ink">
         {children}
       </body>
     </html>

@@ -232,55 +232,69 @@ export default function LeadRecoveryDemo() {
               Workflow
             </p>
             <div className="relative mt-4">
-              <div
-                className="energy-line absolute top-4 bottom-4 left-[15px] w-[2px] rounded-full"
-                aria-hidden="true"
-              />
               <ol className="space-y-4">
                 {NODES.map((node, i) => {
                   const state = nodeState(i);
+                  const nextIsLit = nodeState(i) !== "waiting" && i < NODES.length - 1;
                   return (
-                    <li key={node.key} className="relative flex items-center gap-3 pl-0">
-                      <span
-                        className={state === "processing" ? "pulse-dot" : ""}
-                        style={{
-                          display: "inline-flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          width: 32,
-                          height: 32,
-                          borderRadius: "999px",
-                          background:
-                            state === "waiting"
-                              ? "rgba(255,255,255,0.06)"
-                              : "color-mix(in srgb, var(--color-volt) 25%, transparent)",
-                          border:
-                            state === "processing"
-                              ? "1.5px solid var(--color-volt)"
-                              : "1px solid transparent",
-                          flexShrink: 0,
-                          zIndex: 1,
-                        }}
-                      >
-                        {state === "done" ? (
-                          <span className="font-mono text-xs text-mint">&#10003;</span>
-                        ) : (
+                    <li key={node.key} className="flex items-stretch gap-3 pl-0">
+                      {/* icon column: circle on top, connector segment fills the rest of the row's height */}
+                      <div className="flex flex-col items-center">
+                        <span
+                          className={state === "processing" ? "pulse-dot" : ""}
+                          style={{
+                            display: "inline-flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            width: 32,
+                            height: 32,
+                            borderRadius: "999px",
+                            background:
+                              state === "waiting"
+                                ? "rgba(255,255,255,0.06)"
+                                : "color-mix(in srgb, var(--color-volt) 25%, transparent)",
+                            border:
+                              state === "processing"
+                                ? "1.5px solid var(--color-volt)"
+                                : "1px solid transparent",
+                            flexShrink: 0,
+                          }}
+                        >
+                          {state === "done" ? (
+                            <span className="font-mono text-xs text-mint">&#10003;</span>
+                          ) : (
+                            <span
+                              className="font-mono text-[10px]"
+                              style={{ color: state === "processing" ? "var(--color-volt)" : "var(--color-muted)" }}
+                            >
+                              {i + 1}
+                            </span>
+                          )}
+                        </span>
+                        {i < NODES.length - 1 && (
                           <span
-                            className="font-mono text-[10px]"
-                            style={{ color: state === "processing" ? "var(--color-volt)" : "var(--color-muted)" }}
-                          >
-                            {i + 1}
-                          </span>
+                            aria-hidden="true"
+                            className="mt-1.5 mb-1.5 w-[2px] flex-1 rounded-full transition-colors duration-300"
+                            style={{
+                              minHeight: 6,
+                              background: nextIsLit
+                                ? "var(--color-volt)"
+                                : "rgba(255,255,255,0.12)",
+                            }}
+                          />
                         )}
-                      </span>
-                      <span
-                        className={`text-sm ${state === "waiting" ? "text-muted" : "text-starlight"}`}
-                      >
-                        {node.label}
-                      </span>
-                      <span className="ml-auto font-mono text-[9px] tracking-widest text-muted uppercase">
-                        {state === "waiting" ? "Waiting" : state === "processing" ? "Processing" : "Complete"}
-                      </span>
+                      </div>
+
+                      <div className="flex flex-1 items-center gap-3 self-center">
+                        <span
+                          className={`text-sm ${state === "waiting" ? "text-muted" : "text-starlight"}`}
+                        >
+                          {node.label}
+                        </span>
+                        <span className="ml-auto font-mono text-[9px] tracking-widest text-muted uppercase">
+                          {state === "waiting" ? "Waiting" : state === "processing" ? "Processing" : "Complete"}
+                        </span>
+                      </div>
                     </li>
                   );
                 })}

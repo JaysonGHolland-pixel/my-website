@@ -71,6 +71,25 @@ const ARCHITECTURE = [
   "Logging / monitoring",
 ];
 
+const ROW_HEIGHT = 64;
+const CIRCLE_R = 16;
+const ARC_R = 22;
+const COL_WIDTH = 56;
+const CX = COL_WIDTH / 2;
+
+function buildConnectorPath(count: number) {
+  let d = "";
+  for (let i = 0; i < count; i++) {
+    const centerY = i * ROW_HEIGHT + ROW_HEIGHT / 2;
+    const arcStart = centerY - ARC_R;
+    const arcEnd = centerY + ARC_R;
+    d += i === 0 ? `M ${CX} ${arcStart}` : ` L ${CX} ${arcStart}`;
+    // sweep-flag 0 bulges the arc to the left, away from the label text
+    d += ` A ${ARC_R} ${ARC_R} 0 0 0 ${CX} ${arcEnd}`;
+  }
+  return d;
+}
+
 const ENQUIRY = {
   name: "Sarah Mitchell",
   business: "Mitchell Renovations",
@@ -231,70 +250,103 @@ export default function LeadRecoveryDemo() {
             <p className="font-mono text-[10px] tracking-widest text-muted uppercase">
               Workflow
             </p>
-            <div className="relative mt-4">
-              <ol className="space-y-4">
+            <div
+              className="relative mt-4"
+              style={{ height: NODES.length * ROW_HEIGHT }}
+            >
+              <svg
+                className="absolute top-0 left-0"
+                width={COL_WIDTH}
+                height={NODES.length * ROW_HEIGHT}
+                aria-hidden="true"
+              >
+                <defs>
+                  <linearGradient id="connectorDim" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="rgba(255,255,255,0.12)" />
+                    <stop offset="100%" stopColor="rgba(255,255,255,0.12)" />
+                  </linearGradient>
+                </defs>
+                {/* dim base path, always fully visible */}
+                <path
+                  d={buildConnectorPath(NODES.length)}
+                  fill="none"
+                  stroke="url(#connectorDim)"
+                  strokeWidth="2"
+                />
+                {/* lit overlay, clipped to how far the workflow has progressed */}
+                <clipPath id="connectorReveal">
+                  <rect
+                    x="0"
+                    y="0"
+                    width={COL_WIDTH}
+                    height={
+                      stageIndex < 0
+                        ? 0
+                        : Math.min(stageIndex + 1, NODES.length) * ROW_HEIGHT
+                    }
+                  />
+                </clipPath>
+                <path
+                  d={buildConnectorPath(NODES.length)}
+                  fill="none"
+                  stroke="var(--color-volt)"
+                  strokeWidth="2"
+                  clipPath="url(#connectorReveal)"
+                  style={{ transition: "clip-path 0.3s ease" }}
+                />
+              </svg>
+
+              <ol>
                 {NODES.map((node, i) => {
                   const state = nodeState(i);
-                  const nextIsLit = nodeState(i) !== "waiting" && i < NODES.length - 1;
                   return (
-                    <li key={node.key} className="flex items-stretch gap-3 pl-0">
-                      {/* icon column: circle on top, connector segment fills the rest of the row's height */}
-                      <div className="flex flex-col items-center">
-                        <span
-                          className={state === "processing" ? "pulse-dot" : ""}
-                          style={{
-                            display: "inline-flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            width: 32,
-                            height: 32,
-                            borderRadius: "999px",
-                            background:
-                              state === "waiting"
-                                ? "rgba(255,255,255,0.06)"
-                                : "color-mix(in srgb, var(--color-volt) 25%, transparent)",
-                            border:
-                              state === "processing"
-                                ? "1.5px solid var(--color-volt)"
-                                : "1px solid transparent",
-                            flexShrink: 0,
-                          }}
-                        >
-                          {state === "done" ? (
-                            <span className="font-mono text-xs text-mint">&#10003;</span>
-                          ) : (
-                            <span
-                              className="font-mono text-[10px]"
-                              style={{ color: state === "processing" ? "var(--color-volt)" : "var(--color-muted)" }}
-                            >
-                              {i + 1}
-                            </span>
-                          )}
-                        </span>
-                        {i < NODES.length - 1 && (
+                    <li
+                      key={node.key}
+                      className="absolute right-0 left-0 flex items-center gap-3"
+                      style={{ top: i * ROW_HEIGHT, height: ROW_HEIGHT }}
+                    >
+                      <span
+                        className={state === "processing" ? "pulse-dot" : ""}
+                        style={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          width: 32,
+                          height: 32,
+                          borderRadius: "999px",
+                          background:
+                            state === "waiting"
+                              ? "rgba(255,255,255,0.06)"
+                              : "color-mix(in srgb, var(--color-volt) 25%, transparent)",
+                          border:
+                            state === "processing"
+                              ? "1.5px solid var(--color-volt)"
+                              : "1px solid transparent",
+                          flexShrink: 0,
+                          marginLeft: CX - CIRCLE_R,
+                          zIndex: 1,
+                        }}
+                      >
+                        {state === "done" ? (
+                          <span className="font-mono text-xs text-mint">&#10003;</span>
+                        ) : (
                           <span
-                            aria-hidden="true"
-                            className="mt-1.5 mb-1.5 w-[2px] flex-1 rounded-full transition-colors duration-300"
-                            style={{
-                              minHeight: 6,
-                              background: nextIsLit
-                                ? "var(--color-volt)"
-                                : "rgba(255,255,255,0.12)",
-                            }}
-                          />
+                            className="font-mono text-[10px]"
+                            style={{ color: state === "processing" ? "var(--color-volt)" : "var(--color-muted)" }}
+                          >
+                            {i + 1}
+                          </span>
                         )}
-                      </div>
+                      </span>
 
-                      <div className="flex flex-1 items-center gap-3 self-center">
-                        <span
-                          className={`text-sm ${state === "waiting" ? "text-muted" : "text-starlight"}`}
-                        >
-                          {node.label}
-                        </span>
-                        <span className="ml-auto font-mono text-[9px] tracking-widest text-muted uppercase">
-                          {state === "waiting" ? "Waiting" : state === "processing" ? "Processing" : "Complete"}
-                        </span>
-                      </div>
+                      <span
+                        className={`text-sm ${state === "waiting" ? "text-muted" : "text-starlight"}`}
+                      >
+                        {node.label}
+                      </span>
+                      <span className="ml-auto font-mono text-[9px] tracking-widest text-muted uppercase">
+                        {state === "waiting" ? "Waiting" : state === "processing" ? "Processing" : "Complete"}
+                      </span>
                     </li>
                   );
                 })}

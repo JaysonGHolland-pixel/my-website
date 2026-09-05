@@ -45,7 +45,7 @@ export default function ServiceCard({
         </div>
         <div className="flex flex-1 flex-col p-7">
           <h3 className="font-display text-xl font-bold">{title}</h3>
-          <p className="mt-3 text-sm leading-relaxed text-paper/70">
+          <p className="mt-3 text-sm leading-relaxed text-muted">
             {description}
           </p>
           <button
@@ -61,12 +61,12 @@ export default function ServiceCard({
 
       {open && (
         <div
-          className="fixed inset-0 z-20 flex items-center justify-center bg-ink/60 p-6 backdrop-blur-sm"
+          className="fixed inset-0 z-20 flex items-center justify-center bg-void/70 p-6 backdrop-blur-sm"
           onClick={() => setOpen(false)}
           role="presentation"
         >
           <div
-            className="max-w-md rounded-3xl bg-paper p-8 text-ink shadow-2xl"
+            className="glass-panel max-w-md rounded-3xl p-8 text-starlight shadow-2xl"
             role="dialog"
             aria-modal="true"
             aria-labelledby="example-heading"
@@ -78,7 +78,7 @@ export default function ServiceCard({
             <h4 id="example-heading" className="mt-2 font-display text-xl font-bold">
               {example.heading}
             </h4>
-            <ol className="mt-4 space-y-2 text-sm text-ink/80">
+            <ol className="mt-4 space-y-2 text-sm text-starlight/80">
               {example.steps.map((step, i) => (
                 <li key={step} className="flex gap-3">
                   <span
@@ -92,12 +92,12 @@ export default function ServiceCard({
               ))}
             </ol>
             {example.note && (
-              <p className="mt-4 text-xs text-ink/50">{example.note}</p>
+              <p className="mt-4 text-xs text-muted">{example.note}</p>
             )}
             <button
               type="button"
               onClick={() => setOpen(false)}
-              className="pop-button mt-6 rounded-full bg-ink px-5 py-2 font-display text-xs font-semibold text-paper"
+              className="pop-button mt-6 rounded-full bg-starlight px-5 py-2 font-display text-xs font-semibold text-void"
             >
               Close
             </button>

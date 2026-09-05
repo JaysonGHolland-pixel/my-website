@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Fredoka, Plus_Jakarta_Sans, Space_Mono } from "next/font/google";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import Starfield from "@/components/Starfield";
+import MusicToggle from "@/components/MusicToggle";
 import "./globals.css";
 
 const fredoka = Fredoka({
@@ -34,11 +36,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${fredoka.variable} ${jakarta.variable} ${spaceMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col overflow-x-hidden bg-paper text-ink">
+      <body className="min-h-full flex flex-col overflow-x-hidden bg-void text-starlight">
+        <Starfield />
         <div className="grain-overlay" aria-hidden="true" />
         <SiteHeader />
         {children}
         <SiteFooter />
+        <MusicToggle />
       </body>
     </html>
   );

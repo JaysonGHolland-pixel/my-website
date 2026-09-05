@@ -1,11 +1,8 @@
-import FlowGraphic from "@/components/FlowGraphic";
-import HeroOrb from "@/components/HeroOrb";
+import Link from "next/link";
+import HeroPlanet from "@/components/HeroPlanet";
 import Reveal from "@/components/Reveal";
 import ServiceCard from "@/components/ServiceCard";
 import StepCard from "@/components/StepCard";
-import ToolMarquee from "@/components/ToolMarquee";
-
-const CONTACT_EMAIL = "JaysonAiHolland@gmail.com";
 
 const SERVICES = [
   {
@@ -113,10 +110,10 @@ const STEPS = [
 
 export default function Home() {
   return (
-    <main className="overflow-x-hidden">
-      <section className="relative px-6 pt-24 pb-8">
+    <main className="relative z-10 overflow-x-hidden">
+      <section className="relative px-6 pt-24 pb-0">
         <div className="relative mx-auto max-w-3xl text-center">
-          <span className="inline-block rounded-full border border-ink/10 bg-white px-4 py-1.5 font-mono text-[11px] tracking-widest text-ink/60 uppercase">
+          <span className="glass-panel inline-block rounded-full px-4 py-1.5 font-mono text-[11px] tracking-widest text-muted uppercase">
             <span className="spark">✨</span> Jayson AI Holland — Automation
             Studio
           </span>
@@ -126,49 +123,61 @@ export default function Home() {
             <span className="gradient-text">fun</span> to watch run.
           </h1>
 
-          <p className="mx-auto mt-8 max-w-lg text-lg leading-relaxed text-ink/60">
+          <p className="mx-auto mt-8 max-w-lg text-lg leading-relaxed text-muted">
             AI agents and workflows — designed, wired, and shipped by someone
             who builds them for a living. No decks, no snooze-fest demos.
             Just systems that run.
           </p>
 
           <div className="mt-12 flex flex-wrap justify-center gap-4">
-            <a
-              href="#contact"
+            <Link
+              href="/contact"
               className="pop-button glow-cta rounded-full bg-gradient-to-r from-volt to-punch px-8 py-4 font-display text-sm font-semibold text-white shadow-lg"
             >
               Start a build 🚀
-            </a>
+            </Link>
             <a
-              href="#services"
-              className="pop-button rounded-full border border-ink/15 bg-white/80 px-8 py-4 font-display text-sm font-semibold backdrop-blur"
+              href="#mission"
+              className="glass-panel pop-button rounded-full px-8 py-4 font-display text-sm font-semibold text-starlight"
             >
-              See what we build
+              See how a build runs
             </a>
           </div>
         </div>
 
-        <HeroOrb />
+        <HeroPlanet />
       </section>
 
-      <section className="px-6 pb-24">
-        <div className="mx-auto max-w-4xl">
-          <p className="text-center font-mono text-[11px] tracking-widest text-ink/35 uppercase">
-            Built with
-          </p>
-          <div className="mt-6">
-            <ToolMarquee />
+      <section id="mission" className="relative px-6 pt-0 pb-28 sm:pb-36">
+        <div className="mx-auto max-w-3xl">
+          <Reveal>
+            <p className="text-center font-mono text-xs tracking-widest text-punch uppercase">
+              Mission timeline
+            </p>
+            <h2 className="display-tight mt-4 text-center font-display text-4xl font-bold sm:text-5xl">
+              Three stages. Nothing skipped.
+            </h2>
+          </Reveal>
+
+          <div className="relative mt-16">
+            <div
+              className="energy-line absolute top-7 bottom-7 left-[52px] w-[3px] rounded-full"
+              aria-hidden="true"
+            />
+            <ol className="space-y-6">
+              {STEPS.map((step, i) => (
+                <Reveal key={step.number} delay={i * 120}>
+                  <li>
+                    <StepCard {...step} />
+                  </li>
+                </Reveal>
+              ))}
+            </ol>
           </div>
         </div>
       </section>
 
-      <section className="px-6 pb-32">
-        <Reveal className="mx-auto max-w-3xl">
-          <FlowGraphic />
-        </Reveal>
-      </section>
-
-      <section id="services" className="bg-ink px-6 py-28 text-paper sm:py-36">
+      <section id="services" className="relative px-6 py-28 sm:py-36">
         <div className="mx-auto max-w-5xl">
           <Reveal>
             <p className="font-mono text-xs tracking-widest text-sun uppercase">
@@ -189,57 +198,31 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="how" className="px-6 py-28 sm:py-36">
-        <div className="mx-auto max-w-3xl">
-          <Reveal>
-            <p className="text-center font-mono text-xs tracking-widest text-punch uppercase">
-              How a build runs
-            </p>
-            <h2 className="display-tight mt-4 text-center font-display text-4xl font-bold sm:text-5xl">
-              Three stages. Nothing skipped.
-            </h2>
-          </Reveal>
-
-          <ol className="mt-16 space-y-6">
-            {STEPS.map((step, i) => (
-              <Reveal key={step.number} delay={i * 120}>
-                <li>
-                  <StepCard {...step} />
-                </li>
-              </Reveal>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      <section
-        id="contact"
-        className="relative overflow-hidden bg-gradient-to-br from-volt to-punch px-6 py-28 text-white sm:py-36"
-      >
+      <section className="relative overflow-hidden px-6 py-28 sm:py-36">
         <span
           aria-hidden="true"
-          className="blob absolute -top-10 -left-10 h-56 w-56 rounded-full bg-white/10 blur-3xl"
+          className="blob absolute -top-10 -left-10 h-56 w-56 rounded-full bg-volt/25 blur-3xl"
         />
         <span
           aria-hidden="true"
-          className="blob blob-reverse absolute -right-10 -bottom-10 h-64 w-64 rounded-full bg-sun/20 blur-3xl"
+          className="blob blob-reverse absolute -right-10 -bottom-10 h-64 w-64 rounded-full bg-punch/25 blur-3xl"
         />
 
         <Reveal className="relative mx-auto max-w-xl text-center">
           <h2 className="display-tight font-display text-4xl font-bold sm:text-5xl">
-            Start a build.
+            Ready for lift-off?
           </h2>
-          <p className="mx-auto mt-5 max-w-md text-white/90">
+          <p className="mx-auto mt-5 max-w-md text-muted">
             Tell me what&rsquo;s slow, manual, or held together with
             copy-paste. I&rsquo;ll tell you straight whether automation
             actually fixes it.
           </p>
-          <a
-            href={`mailto:${CONTACT_EMAIL}`}
-            className="pop-button mt-9 inline-block rounded-full bg-white px-8 py-4 font-display text-sm font-semibold text-volt shadow-lg"
+          <Link
+            href="/contact"
+            className="pop-button glow-cta mt-9 inline-block rounded-full bg-gradient-to-r from-volt to-punch px-8 py-4 font-display text-sm font-semibold text-white shadow-lg"
           >
-            Email {CONTACT_EMAIL}
-          </a>
+            Start a build 🚀
+          </Link>
         </Reveal>
       </section>
     </main>

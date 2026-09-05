@@ -24,7 +24,7 @@ export default function ToolMarquee() {
         {[...TOOLS, ...TOOLS].map((tool, i) => (
           <span
             key={`${tool}-${i}`}
-            className="font-display text-lg font-semibold whitespace-nowrap text-ink/35"
+            className="font-display text-lg font-semibold whitespace-nowrap text-muted/50"
           >
             {tool}
           </span>

@@ -1,8 +1,11 @@
 @import "tailwindcss";
 
 :root {
-  --paper: #fbfaff;
-  --ink: #1a1533;
+  --void: #060515;
+  --void-deep: #0b0a22;
+  --panel: #12112c;
+  --starlight: #f2effc;
+  --muted: #a7a0cf;
   --volt: #7c3aed;
   --punch: #ff5d8f;
   --sun: #ffc93c;
@@ -10,8 +13,11 @@
 }
 
 @theme inline {
-  --color-paper: var(--paper);
-  --color-ink: var(--ink);
+  --color-void: var(--void);
+  --color-void-deep: var(--void-deep);
+  --color-panel: var(--panel);
+  --color-starlight: var(--starlight);
+  --color-muted: var(--muted);
   --color-volt: var(--volt);
   --color-punch: var(--punch);
   --color-sun: var(--sun);
@@ -23,18 +29,18 @@
 }
 
 body {
-  background: var(--paper);
-  color: var(--ink);
+  background: var(--void);
+  color: var(--starlight);
   font-family: var(--font-sans);
 }
 
 ::selection {
   background: var(--sun);
-  color: var(--ink);
+  color: var(--void);
 }
 
 :focus-visible {
-  outline: 3px solid var(--volt);
+  outline: 3px solid var(--sun);
   outline-offset: 3px;
   border-radius: 2px;
 }
@@ -52,8 +58,8 @@ body {
   inset: 0;
   z-index: 50;
   pointer-events: none;
-  opacity: 0.055;
-  mix-blend-mode: multiply;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
 }
 
@@ -69,6 +75,12 @@ body {
 }
 .premium-card:hover {
   transform: translateY(-8px);
+}
+
+.glass-panel {
+  background: color-mix(in srgb, var(--panel) 70%, transparent);
+  border: 1px solid rgb(255 255 255 / 0.08);
+  backdrop-filter: blur(16px);
 }
 
 .swatch {
@@ -118,11 +130,11 @@ body {
   border-radius: inherit;
   background: linear-gradient(120deg, var(--volt), var(--punch), var(--sun));
   filter: blur(14px);
-  opacity: 0.55;
+  opacity: 0.65;
   transition: opacity 0.25s ease;
 }
 .glow-cta:hover::before {
-  opacity: 0.85;
+  opacity: 0.95;
 }
 
 .tilt-card {
@@ -132,7 +144,35 @@ body {
 }
 .tilt-card:hover {
   transform: translateY(-6px) rotate(-0.75deg);
-  box-shadow: 0 20px 40px -20px rgb(26 21 51 / 0.35);
+  box-shadow: 0 20px 40px -20px rgb(0 0 0 / 0.6);
+}
+
+/* Vertical energy line running the mission-stage timeline, with a
+   traveling comet implemented as an animated gradient sweep so it
+   works regardless of exact section height. */
+.energy-line {
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--volt) 15%,
+    var(--punch) 50%,
+    var(--mint) 85%,
+    transparent
+  );
+  box-shadow: 0 0 16px 2px color-mix(in srgb, var(--punch) 55%, transparent);
+}
+.energy-line::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    white 8%,
+    transparent 16%
+  );
+  background-size: 100% 300%;
+  mix-blend-mode: screen;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -168,6 +208,10 @@ body {
     animation: spark 2.2s ease-in-out infinite;
   }
 
+  .twinkle {
+    animation: twinkle 4s ease-in-out infinite;
+  }
+
   .marquee-track {
     animation: marquee 32s linear infinite;
   }
@@ -180,6 +224,13 @@ body {
   }
   .orb-spin {
     animation: orb-spin 26s linear infinite;
+  }
+  .orb-spin-slow {
+    animation: orb-spin 60s linear infinite;
+  }
+
+  .energy-line::before {
+    animation: comet-travel 3.4s linear infinite;
   }
 
   .reveal {
@@ -240,6 +291,16 @@ body {
   }
 }
 
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: var(--star-min, 0.2);
+  }
+  50% {
+    opacity: var(--star-max, 1);
+  }
+}
+
 @keyframes marquee {
   to {
     transform: translateX(-50%);
@@ -265,6 +326,15 @@ body {
 @keyframes orb-spin {
   to {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes comet-travel {
+  from {
+    background-position: 0 -200%;
+  }
+  to {
+    background-position: 0 200%;
   }
 }
 

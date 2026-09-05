@@ -5,6 +5,8 @@ import ServiceCard from "@/components/ServiceCard";
 import StepCard from "@/components/StepCard";
 import PipelineDemo from "@/components/PipelineDemo";
 import SupportAgentDemo from "@/components/SupportAgentDemo";
+import LeadRecoveryDemo from "@/components/LeadRecoveryDemo";
+import AutomationComparison from "@/components/AutomationComparison";
 
 const SERVICES = [
   {
@@ -242,39 +244,28 @@ export default function Home() {
             </p>
           </Reveal>
 
-          <div className="mt-14 space-y-8">
-            <Reveal>
-              <PipelineDemo
-                tag="Demo Build 01"
-                title="AI lead recovery system"
-                problem="Leads arrive through a website form at all hours — including nights and weekends. A slow response is often the difference between a sale and a lost lead."
-                accent="var(--color-volt)"
-                steps={[
-                  { label: "New lead received", log: "Form submission captured: name, email, message.", phase: "input" },
-                  { label: "AI analyzes lead", log: "Reading intent and urgency from the message.", phase: "logic" },
-                  { label: "Lead qualified", log: "Classified: high-intent, ready to talk.", phase: "logic" },
-                  { label: "CRM updated", log: "Contact record created with lead details.", phase: "automation" },
-                  { label: "Personalized response generated", log: "Drafting a reply referencing what they actually asked.", phase: "automation" },
-                  { label: "Sales notification triggered", log: "Alert sent to the sales channel.", phase: "automation" },
-                  { label: "Follow-up scheduled", log: "Reminder set for 24 hours if no reply.", phase: "output" },
-                ]}
-                architecture={[
-                  "Website form",
-                  "Webhook / API",
-                  "AI Agent (qualification)",
-                  "CRM / database write",
-                  "Response generator",
-                  "Notification (Slack/email)",
-                  "Logging & follow-up scheduler",
-                ]}
-              />
-            </Reveal>
+          <Reveal delay={80} className="mt-14">
+            <LeadRecoveryDemo />
+          </Reveal>
 
-            <Reveal delay={100}>
+          <Reveal delay={140} className="mt-8">
+            <AutomationComparison />
+          </Reveal>
+
+          <div className="mt-16">
+            <Reveal>
+              <p className="text-center font-mono text-xs tracking-widest text-muted uppercase">
+                Also built
+              </p>
+            </Reveal>
+          </div>
+
+          <div className="mt-8 space-y-8">
+            <Reveal>
               <SupportAgentDemo />
             </Reveal>
 
-            <Reveal delay={200}>
+            <Reveal delay={100}>
               <PipelineDemo
                 tag="Demo Build 03"
                 title="AI business admin automation"

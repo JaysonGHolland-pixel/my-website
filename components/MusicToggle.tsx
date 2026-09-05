@@ -21,15 +21,42 @@ export default function MusicToggle() {
 
   return (
     <>
-      <audio ref={audioRef} src="/audio/space-ambient.mp3" loop preload="none" />
+      <audio ref={audioRef} src="/audio/piano-moment.mp3" loop preload="none" />
       <button
         type="button"
         onClick={toggle}
         aria-pressed={playing}
         aria-label={playing ? "Pause background music" : "Play background music"}
-        className="glass-panel pop-button fixed right-6 bottom-6 z-40 flex h-12 w-12 items-center justify-center rounded-full text-lg"
+        className="glass-panel pop-button fixed right-6 bottom-6 z-40 flex h-12 w-12 items-center justify-center rounded-full"
       >
-        {playing ? "🔊" : "🔇"}
+        <svg
+          viewBox="0 0 24 24"
+          className="h-4 w-4"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M9 17V5.5L20 3v11.5"
+            stroke={playing ? "var(--color-volt)" : "var(--color-muted)"}
+            strokeWidth="1.6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <circle
+            cx="6"
+            cy="17"
+            r="3"
+            stroke={playing ? "var(--color-volt)" : "var(--color-muted)"}
+            strokeWidth="1.6"
+          />
+          <circle
+            cx="17"
+            cy="14.5"
+            r="3"
+            stroke={playing ? "var(--color-volt)" : "var(--color-muted)"}
+            strokeWidth="1.6"
+          />
+        </svg>
       </button>
     </>
   );

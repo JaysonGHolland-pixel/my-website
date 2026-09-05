@@ -10,13 +10,11 @@ export type StepDemo = {
 
 export default function StepCard({
   number,
-  emoji,
   title,
   description,
   demo,
 }: {
   number: string;
-  emoji: string;
   title: string;
   description: string;
   demo: StepDemo;
@@ -37,17 +35,18 @@ export default function StepCard({
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="tilt-card glass-panel relative z-10 flex w-full items-start gap-5 rounded-3xl p-6 text-left"
+        className="tilt-card glass-panel relative z-10 flex w-full items-start gap-5 rounded-2xl p-6 text-left"
       >
         <span
-          className="wiggle-hover flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl text-2xl"
+          className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full font-display text-lg font-bold text-void"
           style={{
             background:
-              "radial-gradient(circle at 35% 30%, var(--sun), color-mix(in srgb, var(--sun) 30%, transparent))",
-            boxShadow: "0 0 20px 2px color-mix(in srgb, var(--sun) 45%, transparent)",
+              "radial-gradient(circle at 32% 28%, var(--sun), var(--volt))",
+            boxShadow:
+              "0 0 0 3px color-mix(in srgb, var(--volt) 25%, transparent), inset 0 -3px 6px rgb(0 0 0 / 0.3)",
           }}
         >
-          {emoji}
+          {number}
         </span>
         <div className="flex-1">
           <span className="font-mono text-xs tracking-widest text-muted">

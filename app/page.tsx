@@ -1,5 +1,5 @@
 import Link from "next/link";
-import HeroGlobe from "@/components/HeroGlobe";
+import LampDesk from "@/components/LampDesk";
 import Reveal from "@/components/Reveal";
 import ServiceCard from "@/components/ServiceCard";
 import StepCard from "@/components/StepCard";
@@ -7,10 +7,10 @@ import PipelineDemo from "@/components/PipelineDemo";
 import SupportAgentDemo from "@/components/SupportAgentDemo";
 import LeadRecoveryDemo from "@/components/LeadRecoveryDemo";
 import AutomationComparison from "@/components/AutomationComparison";
+import IndustryBook from "@/components/IndustryBook";
 
 const SERVICES = [
   {
-    emoji: "🤖",
     color: "var(--color-volt)",
     title: "AI Agents",
     description:
@@ -26,7 +26,6 @@ const SERVICES = [
     },
   },
   {
-    emoji: "⚙️",
     color: "var(--color-punch)",
     title: "Workflow Automation",
     description:
@@ -42,7 +41,6 @@ const SERVICES = [
     },
   },
   {
-    emoji: "🔌",
     color: "var(--color-mint)",
     title: "Systems Integration",
     description:
@@ -62,7 +60,6 @@ const SERVICES = [
 const BUILD_PHASES = [
   {
     number: "01",
-    emoji: "🔍",
     title: "Discover",
     description:
       "Find the repetitive, slow, expensive, or error-prone process — before touching any tool.",
@@ -79,7 +76,6 @@ const BUILD_PHASES = [
   },
   {
     number: "02",
-    emoji: "🧭",
     title: "Design",
     description:
       "Map the workflow step by step and find exactly where automation creates real leverage.",
@@ -96,7 +92,6 @@ const BUILD_PHASES = [
   },
   {
     number: "03",
-    emoji: "🛠️",
     title: "Build",
     description:
       "Connect the APIs, tools, databases, agents, and workflows the process actually needs.",
@@ -113,7 +108,6 @@ const BUILD_PHASES = [
   },
   {
     number: "04",
-    emoji: "🧪",
     title: "Test",
     description:
       "Run realistic scenarios and the edge cases that break naive automations.",
@@ -130,7 +124,6 @@ const BUILD_PHASES = [
   },
   {
     number: "05",
-    emoji: "🚀",
     title: "Ship",
     description:
       "Deploy, document, monitor, and hand off — so the system outlives the build.",
@@ -160,8 +153,7 @@ export default function Home() {
       <section className="relative px-6 pt-24 pb-0">
         <div className="relative mx-auto max-w-3xl text-center">
           <span className="glass-panel inline-block rounded-full px-4 py-1.5 font-mono text-[11px] tracking-widest text-muted uppercase">
-            <span className="spark">✨</span> Jayson AI Holland — Automation
-            Studio
+            Jayson AI Holland &middot; Automation Studio
           </span>
 
           <h1 className="display-tight mt-8 font-display text-5xl leading-[1.05] font-bold sm:text-7xl lg:text-[5.5rem]">
@@ -191,7 +183,7 @@ export default function Home() {
           </div>
         </div>
 
-        <HeroGlobe />
+        <LampDesk />
       </section>
 
       <section id="approach" className="relative px-6 pt-0 pb-28 sm:pb-36">
@@ -313,6 +305,59 @@ export default function Home() {
               </Reveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="relative px-6 pb-28 sm:pb-36">
+        <div className="mx-auto max-w-3xl text-center">
+          <Reveal>
+            <p className="font-mono text-xs tracking-widest text-mint uppercase">
+              Who this is for
+            </p>
+            <h2 className="display-tight mt-3 max-w-xl mx-auto font-display text-2xl font-bold sm:text-3xl">
+              The pattern repeats everywhere leads or admin work pile up.
+            </h2>
+            <p className="mx-auto mt-4 max-w-lg text-sm text-muted">
+              The three demos above map to real categories — an inbound-lead
+              business, a support inbox, a repetitive admin process. That
+              pattern shows up across more industries than just renovation.
+            </p>
+          </Reveal>
+
+          <Reveal delay={100}>
+            <div className="mt-8 flex flex-wrap justify-center gap-2">
+              {[
+                "Trades & Home Services",
+                "Real Estate",
+                "E-commerce & Retail",
+                "Professional Services",
+                "Hospitality",
+                "Health & Wellness",
+              ].map((industry) => (
+                <span
+                  key={industry}
+                  className="glass-panel rounded-full px-4 py-2 font-mono text-xs text-starlight/80"
+                >
+                  {industry}
+                </span>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="relative px-6 pb-28 sm:pb-36">
+        <div className="mx-auto max-w-6xl">
+          <Reveal>
+            <p className="text-center font-mono text-xs tracking-widest text-mint uppercase">
+              Flip through
+            </p>
+          </Reveal>
+          <Reveal delay={100}>
+            <div className="mt-8">
+              <IndustryBook />
+            </div>
+          </Reveal>
         </div>
       </section>
 

@@ -1,15 +1,20 @@
 @import "tailwindcss";
 
+/* V7 "The Study" palette — a mahogany-and-brass private office at dusk.
+   Variable names are inherited from the V6 space theme (volt/punch/sun/mint)
+   but now carry warm office-lamp hues instead of neon — kept as-is so every
+   component that already references var(--color-volt) etc. repaints for
+   free instead of needing a file-by-file rename. */
 :root {
-  --void: #060515;
-  --void-deep: #0b0a22;
-  --panel: #12112c;
-  --starlight: #f2effc;
-  --muted: #a7a0cf;
-  --volt: #7c3aed;
-  --punch: #ff5d8f;
-  --sun: #ffc93c;
-  --mint: #2ee6a6;
+  --void: #1c1712;
+  --void-deep: #100d0a;
+  --panel: #2b2118;
+  --starlight: #ede3cc;
+  --muted: #a8977a;
+  --volt: #c9a227;
+  --punch: #8c3b2e;
+  --sun: #e8c468;
+  --mint: #3d6b54;
 }
 
 @theme inline {
@@ -23,8 +28,8 @@
   --color-sun: var(--sun);
   --color-mint: var(--mint);
 
-  --font-display: var(--font-fredoka);
-  --font-sans: var(--font-jakarta);
+  --font-display: var(--font-playfair);
+  --font-sans: var(--font-source-sans);
   --font-mono: var(--font-space-mono);
 }
 
@@ -77,9 +82,17 @@ body {
   transform: translateY(-8px);
 }
 
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 .glass-panel {
-  background: color-mix(in srgb, var(--panel) 70%, transparent);
-  border: 1px solid rgb(255 255 255 / 0.08);
+  background: color-mix(in srgb, var(--panel) 78%, transparent);
+  border: 1px solid color-mix(in srgb, var(--sun) 18%, transparent);
   backdrop-filter: blur(16px);
 }
 
@@ -108,14 +121,15 @@ body {
 
 .pop-button {
   transition:
-    transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
-    box-shadow 0.2s ease;
+    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.25s ease;
 }
 .pop-button:hover {
-  transform: translateY(-3px) rotate(-1deg) scale(1.03);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px -12px rgb(0 0 0 / 0.5);
 }
 .pop-button:active {
-  transform: translateY(0) scale(0.98);
+  transform: translateY(0) scale(0.99);
 }
 
 .glow-cta {
@@ -125,30 +139,30 @@ body {
 .glow-cta::before {
   content: "";
   position: absolute;
-  inset: -3px;
+  inset: -2px;
   z-index: -1;
   border-radius: inherit;
-  background: linear-gradient(120deg, var(--volt), var(--punch), var(--sun));
-  filter: blur(14px);
-  opacity: 0.65;
+  background: linear-gradient(120deg, var(--volt), var(--sun));
+  filter: blur(10px);
+  opacity: 0.35;
   transition: opacity 0.25s ease;
 }
 .glow-cta:hover::before {
-  opacity: 0.95;
+  opacity: 0.55;
 }
 
 .tilt-card {
   transition:
-    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
-    box-shadow 0.25s ease;
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s ease;
 }
 .tilt-card:hover {
-  transform: translateY(-6px) rotate(-0.75deg);
+  transform: translateY(-4px);
   box-shadow: 0 20px 40px -20px rgb(0 0 0 / 0.6);
 }
 
-/* Vertical energy line running the mission-stage timeline, with a
-   traveling comet implemented as an animated gradient sweep so it
+/* Vertical brass thread running the build-stage timeline, with a
+   traveling gleam implemented as an animated gradient sweep so it
    works regardless of exact section height. */
 .energy-line {
   background: linear-gradient(
@@ -159,7 +173,7 @@ body {
     var(--mint) 85%,
     transparent
   );
-  box-shadow: 0 0 16px 2px color-mix(in srgb, var(--punch) 55%, transparent);
+  box-shadow: 0 0 10px 1px color-mix(in srgb, var(--volt) 35%, transparent);
 }
 .energy-line::before {
   content: "";
@@ -177,10 +191,10 @@ body {
 
 @media (prefers-reduced-motion: no-preference) {
   .blob {
-    animation: drift 14s ease-in-out infinite;
+    animation: drift 18s ease-in-out infinite;
   }
   .blob-slow {
-    animation-duration: 20s;
+    animation-duration: 26s;
   }
   .blob-reverse {
     animation-direction: reverse;
@@ -199,17 +213,12 @@ body {
     animation: pulse 1.8s ease-in-out infinite;
   }
 
-  .wiggle-hover:hover {
-    animation: wiggle 0.4s ease-in-out;
+  .dust-mote {
+    animation: dust-drift linear infinite;
   }
 
-  .spark {
-    display: inline-block;
-    animation: spark 2.2s ease-in-out infinite;
-  }
-
-  .twinkle {
-    animation: twinkle 4s ease-in-out infinite;
+  .lamp-glow {
+    animation: lamp-breathe 6s ease-in-out infinite;
   }
 
   .marquee-track {
@@ -219,18 +228,8 @@ body {
     animation-play-state: paused;
   }
 
-  .orb-morph {
-    animation: orb-morph 18s ease-in-out infinite;
-  }
-  .orb-spin {
-    animation: orb-spin 26s linear infinite;
-  }
-  .orb-spin-slow {
-    animation: orb-spin 60s linear infinite;
-  }
-
   .energy-line::before {
-    animation: comet-travel 3.4s linear infinite;
+    animation: comet-travel 4.2s linear infinite;
   }
 
   .reveal {
@@ -259,7 +258,7 @@ body {
     transform: translate(0, 0) rotate(0deg);
   }
   50% {
-    transform: translate(24px, -18px) rotate(8deg);
+    transform: translate(18px, -14px) rotate(3deg);
   }
 }
 
@@ -291,41 +290,38 @@ body {
   }
 }
 
-@keyframes twinkle {
+@keyframes dust-drift {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0;
+  }
+  15% {
+    opacity: var(--dust-max, 0.5);
+  }
+  85% {
+    opacity: var(--dust-max, 0.5);
+  }
+  100% {
+    transform: translate3d(var(--dust-x, 6px), var(--dust-y, -60px), 0);
+    opacity: 0;
+  }
+}
+
+@keyframes lamp-breathe {
   0%,
   100% {
-    opacity: var(--star-min, 0.2);
+    opacity: 0.75;
+    transform: scale(1);
   }
   50% {
-    opacity: var(--star-max, 1);
+    opacity: 1;
+    transform: scale(1.04);
   }
 }
 
 @keyframes marquee {
   to {
     transform: translateX(-50%);
-  }
-}
-
-@keyframes orb-morph {
-  0%,
-  100% {
-    border-radius: 62% 38% 46% 54% / 58% 44% 56% 42%;
-    transform: rotate(0deg) scale(1);
-  }
-  33% {
-    border-radius: 44% 56% 62% 38% / 42% 62% 38% 58%;
-    transform: rotate(6deg) scale(1.04);
-  }
-  66% {
-    border-radius: 56% 44% 38% 62% / 52% 38% 62% 48%;
-    transform: rotate(-5deg) scale(0.97);
-  }
-}
-
-@keyframes orb-spin {
-  to {
-    transform: rotate(360deg);
   }
 }
 
@@ -338,25 +334,3 @@ body {
   }
 }
 
-@keyframes spark {
-  0%,
-  100% {
-    transform: scale(1) rotate(0deg);
-  }
-  50% {
-    transform: scale(1.25) rotate(15deg);
-  }
-}
-
-@keyframes wiggle {
-  0%,
-  100% {
-    transform: rotate(0deg);
-  }
-  25% {
-    transform: rotate(-6deg);
-  }
-  75% {
-    transform: rotate(6deg);
-  }
-}

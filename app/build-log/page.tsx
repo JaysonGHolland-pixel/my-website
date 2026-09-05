@@ -23,6 +23,11 @@ const ENTRIES = [
     title: "Space theme + mission timeline",
     body: "Found another real Awwwards site — a cosmic scrollytelling piece — and adapted its light-to-dark scroll journey into a full space theme: a starfield, a ringed hero planet, and a glowing energy line connecting the hero straight into the three build-stage nodes below it.",
   },
+  {
+    tag: "Iteration 5 — V7",
+    title: "Professional/business theme",
+    body: "Kept as a separate snapshot alongside the space theme (V6) rather than overwriting it. New direction: a private-study palette — walnut, brass, and mahogany instead of the void/neon scheme — Playfair Display and Source Sans in place of Fredoka, a banker's-lamp desk scene replacing the wireframe globe, drifting warm light-dust in place of the starfield, and a real royalty-free piano track replacing the ambient synth loop. Same structure and demos underneath — this iteration changed the skin and materials, not the substance.",
+  },
 ];
 
 export default function BuildLog() {

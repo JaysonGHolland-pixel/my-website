@@ -9,13 +9,11 @@ export type ServiceExample = {
 };
 
 export default function ServiceCard({
-  emoji,
   color,
   title,
   description,
   example,
 }: {
-  emoji: string;
   color: string;
   title: string;
   description: string;
@@ -34,14 +32,17 @@ export default function ServiceCard({
 
   return (
     <>
-      <div className="premium-card flex h-full flex-col overflow-hidden rounded-[2rem] bg-white/[0.04] ring-1 ring-white/10">
-        <div
-          className="swatch wiggle-hover flex h-36 items-center justify-center"
-          style={{
-            background: `linear-gradient(135deg, ${color}, color-mix(in srgb, ${color} 40%, black))`,
-          }}
-        >
-          <span className="text-5xl drop-shadow-lg">{emoji}</span>
+      <div className="premium-card flex h-full flex-col overflow-hidden rounded-2xl bg-white/[0.03] ring-1 ring-white/10">
+        <div className="flex h-32 items-center justify-center border-b border-white/10 bg-white/[0.02]">
+          <span
+            className="flex h-16 w-16 items-center justify-center rounded-full font-display text-2xl font-bold text-white"
+            style={{
+              background: `radial-gradient(circle at 32% 28%, color-mix(in srgb, ${color} 85%, white), ${color})`,
+              boxShadow: `0 0 0 3px color-mix(in srgb, ${color} 30%, transparent), inset 0 -3px 6px rgb(0 0 0 / 0.35)`,
+            }}
+          >
+            {title.charAt(0)}
+          </span>
         </div>
         <div className="flex flex-1 flex-col p-7">
           <h3 className="font-display text-xl font-bold">{title}</h3>

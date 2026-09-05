@@ -35,6 +35,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${fredoka.variable} ${jakarta.variable} ${spaceMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col overflow-x-hidden bg-paper text-ink">
+        <div className="grain-overlay" aria-hidden="true" />
         <SiteHeader />
         {children}
         <SiteFooter />

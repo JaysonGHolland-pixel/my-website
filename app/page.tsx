@@ -1,7 +1,9 @@
 import FlowGraphic from "@/components/FlowGraphic";
+import HeroOrb from "@/components/HeroOrb";
 import Reveal from "@/components/Reveal";
 import ServiceCard from "@/components/ServiceCard";
 import StepCard from "@/components/StepCard";
+import ToolMarquee from "@/components/ToolMarquee";
 
 const CONTACT_EMAIL = "JaysonAiHolland@gmail.com";
 
@@ -112,128 +114,134 @@ const STEPS = [
 export default function Home() {
   return (
     <main className="overflow-x-hidden">
-        <section className="relative px-6 pt-20 pb-24 sm:pt-28 sm:pb-32">
-          <span
-            aria-hidden="true"
-            className="blob absolute top-10 right-[8%] h-56 w-56 rounded-full bg-volt/20 blur-3xl"
-          />
-          <span
-            aria-hidden="true"
-            className="blob blob-reverse blob-slow absolute top-40 left-[4%] h-64 w-64 rounded-full bg-sun/30 blur-3xl"
-          />
+      <section className="relative px-6 pt-24 pb-8">
+        <div className="relative mx-auto max-w-3xl text-center">
+          <span className="inline-block rounded-full border border-ink/10 bg-white px-4 py-1.5 font-mono text-[11px] tracking-widest text-ink/60 uppercase">
+            <span className="spark">✨</span> Jayson AI Holland — Automation
+            Studio
+          </span>
 
-          <div className="relative mx-auto max-w-3xl text-center">
-            <span className="inline-block rounded-full border-2 border-ink/10 bg-white px-4 py-1.5 font-mono text-xs tracking-wide text-ink/70 uppercase">
-              <span className="spark">✨</span> Jayson AI Holland — Automation
-              Studio
-            </span>
+          <h1 className="display-tight mt-8 font-display text-5xl leading-[1.05] font-bold sm:text-7xl lg:text-[5.5rem]">
+            Automation that&rsquo;s actually{" "}
+            <span className="gradient-text">fun</span> to watch run.
+          </h1>
 
-            <h1 className="mt-6 font-display text-4xl leading-[1.15] font-bold sm:text-6xl">
-              Automation that&rsquo;s actually{" "}
-              <span className="gradient-text">fun</span> to watch run.
-            </h1>
+          <p className="mx-auto mt-8 max-w-lg text-lg leading-relaxed text-ink/60">
+            AI agents and workflows — designed, wired, and shipped by someone
+            who builds them for a living. No decks, no snooze-fest demos.
+            Just systems that run.
+          </p>
 
-            <p className="mx-auto mt-6 max-w-xl text-lg text-ink/70">
-              AI agents and workflows — designed, wired, and shipped by
-              someone who builds them for a living. No decks, no snooze-fest
-              demos. Just systems that run (and look good doing it).
-            </p>
-
-            <div className="mt-10 flex flex-wrap justify-center gap-4">
-              <a
-                href="#contact"
-                className="pop-button glow-cta rounded-full bg-gradient-to-r from-volt to-punch px-7 py-3.5 font-display text-sm font-semibold text-white shadow-lg"
-              >
-                Start a build 🚀
-              </a>
-              <a
-                href="#services"
-                className="pop-button rounded-full border-2 border-ink/15 bg-white px-7 py-3.5 font-display text-sm font-semibold"
-              >
-                See what we build
-              </a>
-            </div>
-          </div>
-
-          <div className="relative mt-16">
-            <FlowGraphic />
-          </div>
-        </section>
-
-        <section id="services" className="bg-ink px-6 py-24 text-paper">
-          <div className="mx-auto max-w-5xl">
-            <Reveal>
-              <p className="font-mono text-xs tracking-widest text-sun uppercase">
-                What we build
-              </p>
-              <h2 className="mt-3 max-w-2xl font-display text-3xl font-bold sm:text-4xl">
-                Three ways automation actually earns its keep.
-              </h2>
-            </Reveal>
-
-            <div className="mt-14 grid gap-6 sm:grid-cols-3">
-              {SERVICES.map((service, i) => (
-                <Reveal key={service.title} delay={i * 120}>
-                  <ServiceCard {...service} />
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="how" className="px-6 py-24">
-          <div className="mx-auto max-w-3xl">
-            <Reveal>
-              <p className="text-center font-mono text-xs tracking-widest text-punch uppercase">
-                How a build runs
-              </p>
-              <h2 className="mt-3 text-center font-display text-3xl font-bold sm:text-4xl">
-                Three stages. Nothing skipped.
-              </h2>
-            </Reveal>
-
-            <ol className="mt-14 space-y-6">
-              {STEPS.map((step, i) => (
-                <Reveal key={step.number} delay={i * 120}>
-                  <li>
-                    <StepCard {...step} />
-                  </li>
-                </Reveal>
-              ))}
-            </ol>
-          </div>
-        </section>
-
-        <section
-          id="contact"
-          className="relative overflow-hidden bg-gradient-to-br from-volt to-punch px-6 py-24 text-white"
-        >
-          <span
-            aria-hidden="true"
-            className="blob absolute -top-10 -left-10 h-56 w-56 rounded-full bg-white/10 blur-3xl"
-          />
-          <span
-            aria-hidden="true"
-            className="blob blob-reverse absolute -right-10 -bottom-10 h-64 w-64 rounded-full bg-sun/20 blur-3xl"
-          />
-
-          <Reveal className="relative mx-auto max-w-xl text-center">
-            <h2 className="font-display text-3xl font-bold sm:text-4xl">
-              Start a build.
-            </h2>
-            <p className="mx-auto mt-4 max-w-md text-white/90">
-              Tell me what&rsquo;s slow, manual, or held together with
-              copy-paste. I&rsquo;ll tell you straight whether automation
-              actually fixes it.
-            </p>
+          <div className="mt-12 flex flex-wrap justify-center gap-4">
             <a
-              href={`mailto:${CONTACT_EMAIL}`}
-              className="pop-button mt-8 inline-block rounded-full bg-white px-7 py-3.5 font-display text-sm font-semibold text-volt shadow-lg"
+              href="#contact"
+              className="pop-button glow-cta rounded-full bg-gradient-to-r from-volt to-punch px-8 py-4 font-display text-sm font-semibold text-white shadow-lg"
             >
-              Email {CONTACT_EMAIL}
+              Start a build 🚀
             </a>
+            <a
+              href="#services"
+              className="pop-button rounded-full border border-ink/15 bg-white/80 px-8 py-4 font-display text-sm font-semibold backdrop-blur"
+            >
+              See what we build
+            </a>
+          </div>
+        </div>
+
+        <HeroOrb />
+      </section>
+
+      <section className="px-6 pb-24">
+        <div className="mx-auto max-w-4xl">
+          <p className="text-center font-mono text-[11px] tracking-widest text-ink/35 uppercase">
+            Built with
+          </p>
+          <div className="mt-6">
+            <ToolMarquee />
+          </div>
+        </div>
+      </section>
+
+      <section className="px-6 pb-32">
+        <Reveal className="mx-auto max-w-3xl">
+          <FlowGraphic />
+        </Reveal>
+      </section>
+
+      <section id="services" className="bg-ink px-6 py-28 text-paper sm:py-36">
+        <div className="mx-auto max-w-5xl">
+          <Reveal>
+            <p className="font-mono text-xs tracking-widest text-sun uppercase">
+              What we build
+            </p>
+            <h2 className="display-tight mt-4 max-w-2xl font-display text-4xl font-bold sm:text-5xl">
+              Three ways automation actually earns its keep.
+            </h2>
           </Reveal>
-        </section>
+
+          <div className="mt-16 grid gap-6 sm:grid-cols-3">
+            {SERVICES.map((service, i) => (
+              <Reveal key={service.title} delay={i * 120}>
+                <ServiceCard {...service} />
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="how" className="px-6 py-28 sm:py-36">
+        <div className="mx-auto max-w-3xl">
+          <Reveal>
+            <p className="text-center font-mono text-xs tracking-widest text-punch uppercase">
+              How a build runs
+            </p>
+            <h2 className="display-tight mt-4 text-center font-display text-4xl font-bold sm:text-5xl">
+              Three stages. Nothing skipped.
+            </h2>
+          </Reveal>
+
+          <ol className="mt-16 space-y-6">
+            {STEPS.map((step, i) => (
+              <Reveal key={step.number} delay={i * 120}>
+                <li>
+                  <StepCard {...step} />
+                </li>
+              </Reveal>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <section
+        id="contact"
+        className="relative overflow-hidden bg-gradient-to-br from-volt to-punch px-6 py-28 text-white sm:py-36"
+      >
+        <span
+          aria-hidden="true"
+          className="blob absolute -top-10 -left-10 h-56 w-56 rounded-full bg-white/10 blur-3xl"
+        />
+        <span
+          aria-hidden="true"
+          className="blob blob-reverse absolute -right-10 -bottom-10 h-64 w-64 rounded-full bg-sun/20 blur-3xl"
+        />
+
+        <Reveal className="relative mx-auto max-w-xl text-center">
+          <h2 className="display-tight font-display text-4xl font-bold sm:text-5xl">
+            Start a build.
+          </h2>
+          <p className="mx-auto mt-5 max-w-md text-white/90">
+            Tell me what&rsquo;s slow, manual, or held together with
+            copy-paste. I&rsquo;ll tell you straight whether automation
+            actually fixes it.
+          </p>
+          <a
+            href={`mailto:${CONTACT_EMAIL}`}
+            className="pop-button mt-9 inline-block rounded-full bg-white px-8 py-4 font-display text-sm font-semibold text-volt shadow-lg"
+          >
+            Email {CONTACT_EMAIL}
+          </a>
+        </Reveal>
+      </section>
     </main>
   );
 }

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Playfair_Display, Source_Sans_3, Space_Mono } from "next/font/google";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import OfficeBackdrop from "@/components/OfficeBackdrop";
 import AmbientDust from "@/components/AmbientDust";
 import MusicToggle from "@/components/MusicToggle";
 import "./globals.css";
@@ -37,6 +38,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${playfair.variable} ${sourceSans.variable} ${spaceMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col overflow-x-hidden bg-void text-starlight">
+        <OfficeBackdrop />
         <AmbientDust />
         <div className="grain-overlay" aria-hidden="true" />
         <SiteHeader />

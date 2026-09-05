@@ -1,5 +1,5 @@
 import Link from "next/link";
-import HeroPlanet from "@/components/HeroPlanet";
+import HeroGlobe from "@/components/HeroGlobe";
 import Reveal from "@/components/Reveal";
 import ServiceCard from "@/components/ServiceCard";
 import StepCard from "@/components/StepCard";
@@ -145,7 +145,7 @@ export default function Home() {
           </div>
         </div>
 
-        <HeroPlanet />
+        <HeroGlobe />
       </section>
 
       <section id="mission" className="relative px-6 pt-0 pb-28 sm:pb-36">

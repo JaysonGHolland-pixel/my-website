@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 
-const CONTACT_EMAIL = "JaysonAiHolland@gmail.com";
+const CONTACT_EMAIL = "oceanic-agentic-ai-consultant@jayson-ai-holland.com";
 
 const FIELDS = [
   { name: "name", label: "Name", type: "text", required: true },
@@ -19,15 +19,15 @@ export default function DiscoveryForm() {
     current: "",
     frequency: "",
   });
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
+    "idle",
+  );
 
   const update = (key: keyof typeof values) => (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => setValues((v) => ({ ...v, [key]: e.target.value }));
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-
+  const openMailto = () => {
     const subject = `Automation build: ${values.process || "new project"}`;
     const body = [
       `Name: ${values.name}`,
@@ -37,10 +37,28 @@ export default function DiscoveryForm() {
       `What currently happens: ${values.current}`,
       `How often it happens: ${values.frequency}`,
     ].join("\n");
+    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  };
 
-    const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailto;
-    setSent(true);
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setStatus("sending");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
+
+      if (!res.ok) throw new Error("send failed");
+      setStatus("sent");
+    } catch {
+      // Backend isn't set up yet, or the request failed — fall back to
+      // opening the visitor's email client so the enquiry still gets sent.
+      openMailto();
+      setStatus("error");
+    }
   };
 
   return (
@@ -122,15 +140,19 @@ export default function DiscoveryForm() {
 
       <button
         type="submit"
-        className="pop-button glow-cta mt-6 w-full rounded-full bg-gradient-to-r from-volt to-punch px-8 py-4 font-display text-sm font-semibold text-white shadow-lg sm:w-auto"
+        disabled={status === "sending"}
+        className="pop-button glow-cta mt-6 w-full rounded-full bg-gradient-to-r from-volt to-punch px-8 py-4 font-display text-sm font-semibold text-white shadow-lg sm:w-auto disabled:opacity-60"
       >
-        Start a build
+        {status === "sending" ? "Sending…" : "Start a build"}
       </button>
 
       <p className="mt-3 font-mono text-[11px] text-muted">
-        {sent
-          ? "Opening your email client with everything filled in — send it whenever you're ready."
-          : "Opens your email client with this pre-filled. Nothing is sent from this page directly."}
+        {status === "sent" &&
+          "Sent — I'll reply within a day or two."}
+        {status === "error" &&
+          "This should automatically open your email app with everything pre-filled — just hit send."}
+        {status === "idle" && "Sent straight to my inbox — no email client needed."}
+        {status === "sending" && "Sending…"}
       </p>
     </form>
   );

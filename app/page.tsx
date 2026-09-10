@@ -1,5 +1,4 @@
 import Link from "next/link";
-import LampDesk from "@/components/LampDesk";
 import Reveal from "@/components/Reveal";
 import ServiceCard from "@/components/ServiceCard";
 import StepCard from "@/components/StepCard";
@@ -7,7 +6,7 @@ import PipelineDemo from "@/components/PipelineDemo";
 import SupportAgentDemo from "@/components/SupportAgentDemo";
 import LeadRecoveryDemo from "@/components/LeadRecoveryDemo";
 import AutomationComparison from "@/components/AutomationComparison";
-import IndustryBook from "@/components/IndustryBook";
+import IndustryFlipBook from "@/components/IndustryFlipBook";
 
 const SERVICES = [
   {
@@ -168,22 +167,24 @@ export default function Home() {
           </p>
 
           <div className="mt-12 flex flex-wrap justify-center gap-4">
+            <a
+              href="#system-demos"
+              className="glass-panel pop-button rounded-full px-8 py-4 font-display text-sm font-semibold text-starlight"
+            >
+              Watch a system run
+            </a>
             <Link
               href="/contact"
               className="pop-button glow-cta rounded-full bg-gradient-to-r from-volt to-punch px-8 py-4 font-display text-sm font-semibold text-white shadow-lg"
             >
               Start a build
             </Link>
-            <a
-              href="#demos"
-              className="glass-panel pop-button rounded-full px-8 py-4 font-display text-sm font-semibold text-starlight"
-            >
-              Watch a system run
-            </a>
           </div>
         </div>
 
-        <LampDesk />
+        <div className="relative mx-auto mt-12 w-full max-w-5xl px-0 sm:px-6">
+          <IndustryFlipBook />
+        </div>
       </section>
 
       <section id="approach" className="relative px-6 pt-0 pb-28 sm:pb-36">
@@ -220,7 +221,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="demos" className="relative px-6 py-28 sm:py-36">
+      <section id="system-demos" className="relative px-6 py-28 sm:py-36">
         <div className="mx-auto max-w-4xl">
           <Reveal>
             <p className="text-center font-mono text-xs tracking-widest text-mint uppercase">
@@ -346,20 +347,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="relative px-6 pb-28 sm:pb-36">
-        <div className="mx-auto max-w-6xl">
-          <Reveal>
-            <p className="text-center font-mono text-xs tracking-widest text-mint uppercase">
-              Flip through
-            </p>
-          </Reveal>
-          <Reveal delay={100}>
-            <div className="mt-8">
-              <IndustryBook />
-            </div>
-          </Reveal>
-        </div>
-      </section>
 
       <section className="relative px-6 pb-28 sm:pb-36">
         <div className="mx-auto max-w-3xl text-center">

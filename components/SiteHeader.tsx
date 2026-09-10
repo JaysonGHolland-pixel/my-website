@@ -32,6 +32,12 @@ export default function SiteHeader() {
             About
           </Link>
           <Link
+            href="/faq"
+            className="hidden font-display text-sm font-semibold text-muted transition-colors hover:text-starlight sm:inline"
+          >
+            FAQ
+          </Link>
+          <Link
             href="/build-log"
             className="hidden font-display text-sm font-semibold text-muted transition-colors hover:text-starlight sm:inline"
           >

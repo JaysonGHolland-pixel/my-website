@@ -20,6 +20,12 @@ export default function SiteHeader() {
             Work
           </Link>
           <Link
+            href="/northstar"
+            className="hidden font-display text-sm font-semibold text-muted transition-colors hover:text-starlight sm:inline"
+          >
+            Case Study
+          </Link>
+          <Link
             href="/about"
             className="hidden font-display text-sm font-semibold text-muted transition-colors hover:text-starlight sm:inline"
           >

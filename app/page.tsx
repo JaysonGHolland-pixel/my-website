@@ -285,6 +285,28 @@ export default function Home() {
               />
             </Reveal>
           </div>
+
+          <Reveal delay={160} className="mt-16">
+            <Link
+              href="/northstar"
+              className="glass-panel pop-button block rounded-3xl p-8 text-center transition hover:border-sun/30"
+            >
+              <p className="font-mono text-xs tracking-widest text-mint uppercase">
+                Full case study
+              </p>
+              <h3 className="display-tight mt-3 font-display text-2xl font-bold sm:text-3xl">
+                See the whole system: Northstar AI Lead Operations
+              </h3>
+              <p className="mx-auto mt-3 max-w-lg text-sm text-muted">
+                Not just one demo — a full dashboard: multiple leads scored
+                differently, a lead detail view with AI reasoning, and a
+                live automation timeline you can run yourself.
+              </p>
+              <span className="mt-5 inline-block font-display text-sm font-semibold text-sun">
+                Open the dashboard →
+              </span>
+            </Link>
+          </Reveal>
         </div>
       </section>
 

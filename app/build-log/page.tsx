@@ -28,6 +28,11 @@ const ENTRIES = [
     title: "Professional/business theme",
     body: "Kept as a separate snapshot alongside the space theme (V6) rather than overwriting it. New direction: a private-study palette — walnut, brass, and mahogany instead of the void/neon scheme — Playfair Display and Source Sans in place of Fredoka, a banker's-lamp desk scene replacing the wireframe globe, drifting warm light-dust in place of the starfield, and a real royalty-free piano track replacing the ambient synth loop. Same structure and demos underneath — this iteration changed the skin and materials, not the substance.",
   },
+  {
+    tag: "Iteration 6",
+    title: "Northstar AI — a full second case study",
+    body: "Added /northstar: a complete lead-operations dashboard for a fictional renovation business — 6 pages (dashboard, leads, lead detail, automation activity, follow-ups, settings), 6 differently-scored example leads, and a live \"Run Demo\" that processes a real enquiry through the pipeline in real time. Wired to the same n8n workflow already running locally for LIVE mode, with DEMO mode as the public default since n8n can't be reached from the deployed site. Also added a free missed-lead-cost calculator, an FAQ page answering real objections, and cross-links between all of it and the original demos — nothing lives on an island.",
+  },
 ];
 
 export default function BuildLog() {

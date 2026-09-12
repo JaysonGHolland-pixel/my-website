@@ -152,33 +152,34 @@ export default function Home() {
       <section className="relative px-6 pt-24 pb-0">
         <div className="relative mx-auto max-w-3xl text-center">
           <span className="glass-panel inline-block rounded-full px-4 py-1.5 font-mono text-[11px] tracking-widest text-muted uppercase">
-            Jayson AI Holland &middot; Automation Studio
+            For plumbers, electricians &amp; trades businesses &middot; NZ/AU
           </span>
 
           <h1 className="display-tight mt-8 font-display text-5xl leading-[1.05] font-bold sm:text-7xl lg:text-[5.5rem]">
-            AI systems that actually{" "}
-            <span className="gradient-text">run</span> the work.
+            You&rsquo;re already paying for{" "}
+            <span className="gradient-text">leads</span> your business isn&rsquo;t answering fast enough.
           </h1>
 
           <p className="mx-auto mt-8 max-w-lg text-lg leading-relaxed text-muted">
-            I design and build the agents, workflows, and connected systems
-            that turn repetitive business processes into automation that
-            actually ships.
+            Every enquiry that sits unanswered after hours, mid-job, or over
+            a weekend is a job going to whoever calls back first. I build a
+            simple system that catches it, replies immediately, and follows
+            up — so it doesn&rsquo;t just sit in an inbox.
           </p>
 
           <div className="mt-12 flex flex-wrap justify-center gap-4">
+            <Link
+              href="/lead-recovery"
+              className="pop-button glow-cta rounded-full bg-gradient-to-r from-volt to-punch px-8 py-4 font-display text-sm font-semibold text-white shadow-lg"
+            >
+              Get a free 10-min Lead Leak Audit
+            </Link>
             <a
               href="#system-demos"
               className="glass-panel pop-button rounded-full px-8 py-4 font-display text-sm font-semibold text-starlight"
             >
-              Watch a system run
+              See how it works
             </a>
-            <Link
-              href="/contact"
-              className="pop-button glow-cta rounded-full bg-gradient-to-r from-volt to-punch px-8 py-4 font-display text-sm font-semibold text-white shadow-lg"
-            >
-              Start a build
-            </Link>
           </div>
         </div>
 
